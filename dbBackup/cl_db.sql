@@ -79,19 +79,19 @@ CREATE TABLE `tblComponentContent` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `tblLangues`
+-- Tablo için tablo yapısı `tblLanguages`
 --
 
-CREATE TABLE `tblLangues` (
+CREATE TABLE `tblLanguages` (
   `LangueID` varchar(5) NOT NULL,
   `LangueName` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Tablo döküm verisi `tblLangues`
+-- Tablo döküm verisi `tblLanguages`
 --
 
-INSERT INTO `tblLangues` (`LangueID`, `LangueName`) VALUES
+INSERT INTO `tblLanguages` (`LangueID`, `LangueName`) VALUES
 ('en', 'English'),
 ('tr', 'Turkish');
 
@@ -197,9 +197,9 @@ ALTER TABLE `tblComponentContent`
   ADD KEY `LangueID` (`LangueID`);
 
 --
--- Tablo için indeksler `tblLangues`
+-- Tablo için indeksler `tblLanguages`
 --
-ALTER TABLE `tblLangues`
+ALTER TABLE `tblLanguages`
   ADD PRIMARY KEY (`LangueID`);
 
 --
@@ -289,7 +289,7 @@ ALTER TABLE `tblBlog`
 --
 ALTER TABLE `tblBlogContent`
   ADD CONSTRAINT `tblBlogContent_ibfk_1` FOREIGN KEY (`BlogID`) REFERENCES `tblBlog` (`BlogID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tblBlogContent_ibfk_2` FOREIGN KEY (`LangueID`) REFERENCES `tblLangues` (`LangueID`);
+  ADD CONSTRAINT `tblBlogContent_ibfk_2` FOREIGN KEY (`LangueID`) REFERENCES `tblLanguages` (`LangueID`);
 
 --
 -- Tablo kısıtlamaları `tblComponent`
@@ -303,7 +303,7 @@ ALTER TABLE `tblComponent`
 --
 ALTER TABLE `tblComponentContent`
   ADD CONSTRAINT `tblComponentContent_ibfk_1` FOREIGN KEY (`ComponentID`) REFERENCES `tblComponent` (`ComponentID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tblComponentContent_ibfk_2` FOREIGN KEY (`LangueID`) REFERENCES `tblLangues` (`LangueID`);
+  ADD CONSTRAINT `tblComponentContent_ibfk_2` FOREIGN KEY (`LangueID`) REFERENCES `tblLanguages` (`LangueID`);
 
 --
 -- Tablo kısıtlamaları `tblProject`
