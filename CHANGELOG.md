@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.2.0 (2020-10-11)
+
+
+### Features
+
+* added database script ([973ba25](https://github.com/ismetkizgin/cl-serve/commit/973ba2541e2c45525efda8dba3c3437382bc88bd))
+* added login router ([41ffe77](https://github.com/ismetkizgin/cl-serve/commit/41ffe77c62e1a69029a5a0afcd0eb55475b9fd02))
+* added token decode router ([9ba62a8](https://github.com/ismetkizgin/cl-serve/commit/9ba62a87b58c75897c5d208c683e1728a1d09a49))
+
 ## [1.1.0](https://github.com/ismetkizgin/cl-serve/compare/v1.0.0...v1.1.0) (2020-10-10)
 
 
