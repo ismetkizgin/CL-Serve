@@ -18,6 +18,15 @@ router.post('/login', authValidator.login, async (req, res) => {
     }
 });
 
+router.delete('/my-account', tokenControl, async (req, res) => {
+    try {
+        const result = await userTransactions.deleteAsync(req.decode.UserID);
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
+    }
+});
+
 router.get('/token-decode', tokenControl, async (req, res) => {
     res.json(req.decode);
 });
