@@ -4,7 +4,7 @@ const TransactionsFactory = require('../database/transactionFactory');
 const { validators, verifyToken } = require('../middleware');
 const userTransactions = TransactionsFactory.creating('userTransactions');
 const authValidator = validators.authValidator;
-const tokenControl = verifyToken.tokenControl
+const tokenControl = verifyToken.tokenControl;
 const HttpStatusCode = require('http-status-codes');
 
 router.post('/login', authValidator.login, async (req, res) => {
@@ -14,7 +14,7 @@ router.post('/login', authValidator.login, async (req, res) => {
         const token = jwt.sign(payload, req.app.get('api_key'), { expiresIn: '7d' });
         res.json({ result, token });
     } catch (error) {
-        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
     }
 });
 

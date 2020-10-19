@@ -13,7 +13,7 @@ class AuthValidator {
             }).validateAsync(req.body);
             next();
         } catch (error) {
-            res.status(HttpStatusCode.EXPECTATION_FAILED).json({ message: 'Must have correct data entry.' });
+            res.status(HttpStatusCode.EXPECTATION_FAILED).json('Must have correct data entry.');
         }
     }
 }
