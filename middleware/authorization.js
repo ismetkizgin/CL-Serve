@@ -7,7 +7,7 @@ class Authorization {
     static async authControl(req, res, next) {
         try {
             const auth = routerAuthorization[req.originalUrl.replace(/[^a-zA-Z -]/g, '')][req.method].Authorize;
-            if (!auth || auth.indexOf(req.decode.UserStatusName) != -1)
+            if (!auth || auth.indexOf(req.decode.UserStatusName) === -1)
                 next()
             else
                 res.status(HttpStatusCode.UNAUTHORIZED).json({ message: "Unauthorized transaction." });
