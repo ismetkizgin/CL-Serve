@@ -5,6 +5,7 @@ const userTransactions = TransactionsFactory.creating('userTransactions');
 const userValidator = validators.userValidator;
 const tokenControl = verifyToken.tokenControl;
 const authControl = authorization.authControl;
+const userInsertAuthControl = authorization.userInsertAuthControl;
 const HttpStatusCode = require('http-status-codes');
 
 router.get('/user', tokenControl, authControl, userValidator.list, async (req, res) => {
@@ -31,7 +32,19 @@ router.delete('/user', tokenControl, authControl, userValidator.delete, async (r
         const result = await userTransactions.deleteAsync(req.body.UserID);
         res.json(result);
     } catch (error) {
-        console.log(error)
+        if (error.status == 404)
+            res.status(HttpStatusCode.UNAUTHORIZED).send('User is not registered in the system or unauthorized operation.');
+        else
+            res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
+router.put('/user', tokenControl, authControl, userValidator.update, userInsertAuthControl, async (req, res) => {
+    try {
+        await userTransactions.findAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
+        const result = await userTransactions.updateAsync(req.body);
+        res.json(result);
+    } catch (error) {
         if (error.status == 404)
             res.status(HttpStatusCode.UNAUTHORIZED).send('User is not registered in the system or unauthorized operation.');
         else
