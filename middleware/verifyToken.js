@@ -10,7 +10,7 @@ class VerifyToken {
             jwt.verify(token, req.app.get('api_key'), (err, decoded) => {
 
                 if (err) {
-                    res.status(HttpStatusCode.PROXY_AUTHENTICATION_REQUIRED).json({ message: 'Failed to authentication token.' });
+                    res.status(HttpStatusCode.PROXY_AUTHENTICATION_REQUIRED).json('Failed to authentication token.');
                 } else {
                     req.decode = decoded;
                     next();
@@ -18,7 +18,7 @@ class VerifyToken {
             });
 
         } else {
-            res.status(HttpStatusCode.PROXY_AUTHENTICATION_REQUIRED).json({ message: 'No token provided.' });
+            res.status(HttpStatusCode.PROXY_AUTHENTICATION_REQUIRED).json('No token provided.');
         }
     }
 }
