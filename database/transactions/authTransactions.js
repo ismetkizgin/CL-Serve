@@ -6,7 +6,7 @@ class AuthTransactions {
         this.datacontext = mysqlDataContext.connection();
     }
 
-    async additiveUserTypesAsync(UserTypeName) {
+    additiveUserTypesAsync(UserTypeName) {
         return new Promise((resolve, reject) => {
             this.datacontext.query(`SELECT UserTypeName FROM tblUserType WHERE UserTypeNumber<(SELECT UserTypeNumber FROM tblUserType WHERE UserTypeName=?)`, [UserTypeName], (error, result) => {
                 if (!error) {

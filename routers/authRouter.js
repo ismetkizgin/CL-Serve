@@ -14,7 +14,7 @@ router.post('/login', authValidator.login, async (req, res) => {
         const token = jwt.sign(payload, req.app.get('api_key'), { expiresIn: '7d' });
         res.json({ result, token });
     } catch (error) {
-        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
 });
 
@@ -23,7 +23,7 @@ router.delete('/my-account', tokenControl, async (req, res) => {
         const result = await userTransactions.deleteAsync(req.decode.UserID);
         res.json(result);
     } catch (error) {
-        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
 });
 
@@ -32,7 +32,16 @@ router.put('/my-account', tokenControl, authValidator.update, async (req, res) =
         const result = await userTransactions.updateAsync(Object.assign(req.body, { UserID: req.decode.UserID }));
         res.json(result);
     } catch (error) {
-        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
+router.put('/change-password', tokenControl, authValidator.changePassword, async (req, res) => {
+    try {
+        const result = await userTransactions.changePasswordAsync(Object.assign(req.body, { UserID: req.decode.UserID }));
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
 });
 
