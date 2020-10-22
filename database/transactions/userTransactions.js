@@ -56,6 +56,22 @@ class UserTransactions {
         });
     }
 
+    passwordControlAsync(values) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`SELECT * FROM tblUser WHERE UserPassword=? AND UserID=? `, [values.UserPassword, values.UserID], (error, result) => {
+                if (!error) {
+                    if (result.length > 0)
+                        resolve(result[0]);
+                    else
+                        reject({ status: HttpStatusCode.BAD_REQUEST, message: 'User password does not match !' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
+
     deleteAsync(UserID) {
         return new Promise((resolve, reject) => {
             this._datacontext.query(`DELETE FROM tblUser WHERE UserID=?`, [UserID], (error, result) => {

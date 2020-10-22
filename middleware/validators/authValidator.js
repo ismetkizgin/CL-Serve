@@ -22,8 +22,8 @@ class AuthValidator {
             await joi.object({
                 UserFirstName: joi.string().min(3).pattern(new RegExp('^[A-Za-zÇçÖöŞşÜüĞğİı ]+$')).required(),
                 UserLastName: joi.string().min(3).pattern(new RegExp('^[A-Za-zÇçÖöŞşÜüĞğİı ]+$')).required(),
-                UserEmail: joi.string().email().required(),
-                UserDateOfBirth: joi.date().required()
+                UserDateOfBirth: joi.date().required(),
+                UserPassword: joi.string().max(99).required(),
             }).validateAsync(req.body);
             next();
         } catch (error) {
