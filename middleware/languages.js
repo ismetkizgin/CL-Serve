@@ -7,12 +7,11 @@ class Authorization {
 
     static async langueRouterControl(req, res, next) {
         try {
-            const langueID = req.params.LangueID;
             const result = await languagesTransactions.listAsync();
-            if (!result.find(langue => langue.LangueID == langueID)) {
+            if (!result.find(langue => langue.LangueID == req.body.LangueID)) {
                 res.status(HttpStatusCode.BAD_REQUEST).send('Language option is not supported.');
                 return;
-            }   
+            }
             next();
         } catch (error) {
             res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
