@@ -38,6 +38,22 @@ class ComponentMenuTransactions {
             });
         });
     }
+
+    insertAsync(values) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`INSERT INTO tblComponentMenu SET ?`, values, (error, result) => {
+                if (!error) {
+                    if (result.affectedRows)
+                        resolve('Component menu registration completed.');
+                    else
+                        reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: 'Error while registering component menu !' });
+                }
+                else {
+                    reject(error.errno == 1062 ? { status: HttpStatusCode.CONFLICT, message: 'There is such component menu.' } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
 }
 
 module.exports = ComponentMenuTransactions;

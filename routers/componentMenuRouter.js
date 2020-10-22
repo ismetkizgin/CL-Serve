@@ -25,4 +25,13 @@ router.get('/component-menu/:ComponentMenuID', tokenControl, authControl, compon
     }
 });
 
+router.post('/component-menu', tokenControl, authControl, componentMenuValidator.insert, async (req, res) => {
+    try {
+        const result = await componentMenuTransactions.insertAsync(req.body);
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
 module.exports = router;
