@@ -23,9 +23,9 @@ class ComponentMenuTransactions {
         });
     }
 
-    findAsync(componentMenuID) {
+    findAsync(ComponentMenuID) {
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT * FROM tblComponentMenu WHERE ComponentMenuID=?`, [componentMenuID], (error, result) => {
+            this._datacontext.query(`SELECT * FROM tblComponentMenu WHERE ComponentMenuID=?`, [ComponentMenuID], (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result);
@@ -59,7 +59,6 @@ class ComponentMenuTransactions {
         return new Promise((resolve, reject) => {
             this._datacontext.query(`UPDATE tblComponentMenu SET ? WHERE ComponentMenuID=?`, [values, values.ComponentMenuID], (error, result) => {
                 if (!error) {
-                    console.log(result);
                     if (result.affectedRows)
                         resolve('Component menu information has been updated.');
                     else
@@ -67,6 +66,22 @@ class ComponentMenuTransactions {
                 }
                 else {
                     reject(error.errno == 1062 ? { status: HttpStatusCode.CONFLICT, message: 'There is such component menu.' } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
+
+    deleteAsync(ComponentMenuID) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`DELETE FROM tblComponentMenu WHERE ComponentMenuID=?`, [ComponentMenuID], (error, result) => {
+                if (!error) {
+                    if (result.affectedRows)
+                        resolve('Deletion succeeded.');
+                    else
+                        reject({ status: HttpStatusCode.GONE, message: 'There is no such component menu !' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
                 }
             });
         });

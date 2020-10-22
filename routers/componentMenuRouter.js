@@ -43,4 +43,13 @@ router.put('/component-menu', tokenControl, authControl, componentMenuValidator.
     }
 });
 
+router.delete('/component-menu', tokenControl, authControl, componentMenuValidator.delete, async (req, res) => {
+    try {
+        const result = await componentMenuTransactions.deleteAsync(req.body.ComponentMenuID);
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
 module.exports = router;

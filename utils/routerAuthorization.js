@@ -24,6 +24,9 @@ module.exports = {
         },
         PUT: {
             Authorize: [Roles.Root, Roles.Administrator]
+        },
+        DELETE: {
+            Authorize: [Roles.Root, Roles.Administrator]
         }
     }
 }
