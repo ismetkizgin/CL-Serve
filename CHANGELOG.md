@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.4.0 (2020-10-22)
+
+
+### Features
+
+* added database test data script ([ad9a00a](https://github.com/ismetkizgin/cl-serve/commit/ad9a00a6dc6308707179c37c208b0dfc2598e5f3))
+
+### Bug Fixes
+
+* date error fixed for user adding and updating operations ([19b34c8](https://github.com/ismetkizgin/cl-serve/commit/19b34c83ae79c8ae6a22a6f4918e818adb1591f0))
+
 ## 1.3.0 (2020-10-20)
 
 
