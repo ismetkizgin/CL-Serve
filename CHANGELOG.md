@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.5.0 (2020-10-22)
+
+
+### Features
+
+* added component menu delete router ([c2532e5](https://github.com/ismetkizgin/cl-serve/commit/c2532e5337dcaec87d2b37d86aa3a9f5ac970117))
+* added component menu find router ([e6a889f](https://github.com/ismetkizgin/cl-serve/commit/e6a889f425c329fd9ccea5f03f43e1cd3e17326e))
+* added component menu list router ([4cc604e](https://github.com/ismetkizgin/cl-serve/commit/4cc604e8bb6cb70e674434ecf9d5ff06c876ff48))
+* added component menu update router ([29d6b6d](https://github.com/ismetkizgin/cl-serve/commit/29d6b6d2c1db988aef1b7e865db6b8f727b9ddc8))
+* component menu insertion router added ([2782b7c](https://github.com/ismetkizgin/cl-serve/commit/2782b7c28cf33caf14df91fd0b63f1428ab2a472))
+
+
 ## 1.4.0 (2020-10-22)
 
 
