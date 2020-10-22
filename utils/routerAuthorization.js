@@ -14,5 +14,10 @@ module.exports = {
         POST: {
             Authorize: [Roles.Root, Roles.Administrator]
         }
+    },
+    component_menu: {
+        GET: {
+            Authorize: [Roles.Root, Roles.Administrator]
+        }
     }
 }

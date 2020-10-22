@@ -8,7 +8,7 @@ class Authorization {
 
     static async authControl(req, res, next) {
         try {
-            const auth = routerAuthorization[req.originalUrl.replace(/[^a-zA-Z -]/g, '')][req.method].Authorize;
+            const auth = routerAuthorization[req.route.path.split('/')[1].replace('-','_')][req.method].Authorize;
             if (!auth || auth.indexOf(req.decode.UserTypeName) != -1)
                 next()
             else
