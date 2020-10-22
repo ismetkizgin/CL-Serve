@@ -1,14 +1,13 @@
 const router = require('express')();
 const TransactionsFactory = require('../database/transactionFactory');
-const { validators, verifyToken, authorization, languages } = require('../middleware');
+const { validators, verifyToken, authorization } = require('../middleware');
 const componentMenuTransactions = TransactionsFactory.creating('componentMenuTransactions');
 const componentMenuValidator = validators.componentMenuValidator;
 const tokenControl = verifyToken.tokenControl;
 const authControl = authorization.authControl;
-const langueRouterControl = languages.langueRouterControl
 const HttpStatusCode = require('http-status-codes');
 
-router.get('/component-menu/', tokenControl, authControl, langueRouterControl, componentMenuValidator.list, async (req, res) => {
+router.get('/component-menu/', tokenControl, authControl, componentMenuValidator.list, async (req, res) => {
     try {
         const result = await componentMenuTransactions.listAsync(req.body);
         res.json(result);

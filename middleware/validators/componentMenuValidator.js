@@ -7,7 +7,6 @@ class ComponentMenuValidator {
     static async list(req, res, next) {
         try {
             await joi.object({
-                LangueID: joi.string().min(2).max(3).required(),
                 limit: joi.number(),
                 offset: joi.number()
             }).with('offset', 'limit').validateAsync(req.body);

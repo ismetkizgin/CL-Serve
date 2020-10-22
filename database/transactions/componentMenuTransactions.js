@@ -9,7 +9,7 @@ class ComponentMenuTransactions {
     listAsync(values) {
         const limitAndOffset = values.offset == null ? `${values.limit == null ? '' : `LIMIT ${values.limit}`}` : `LIMIT ${values.offset},${values.limit}`;
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT * FROM vwComponentMenuList WHERE LangueID=? ORDER BY ComponentMenuName ASC ${limitAndOffset}`, [values.LangueID], (error, result) => {
+            this._datacontext.query(`SELECT * FROM tblComponentMenu ORDER BY ComponentMenuName ASC ${limitAndOffset}`, (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result);
@@ -25,7 +25,7 @@ class ComponentMenuTransactions {
 
     findAsync(componentMenuID) {
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT * FROM vwComponentMenuList WHERE ComponentMenuID=?`, [componentMenuID], (error, result) => {
+            this._datacontext.query(`SELECT * FROM tblComponentMenu WHERE ComponentMenuID=?`, [componentMenuID], (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result);
