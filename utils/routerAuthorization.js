@@ -21,6 +21,9 @@ module.exports = {
         },
         POST: {
             Authorize: [Roles.Root, Roles.Administrator]
+        },
+        PUT: {
+            Authorize: [Roles.Root, Roles.Administrator]
         }
     }
 }

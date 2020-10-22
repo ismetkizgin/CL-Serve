@@ -34,4 +34,13 @@ router.post('/component-menu', tokenControl, authControl, componentMenuValidator
     }
 });
 
+router.put('/component-menu', tokenControl, authControl, componentMenuValidator.update, async (req, res) => {
+    try {
+        const result = await componentMenuTransactions.updateAsync(req.body);
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
 module.exports = router;
