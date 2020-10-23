@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.6.1 (2020-10-23)
+
+
+### Bug Fixes
+
+* fix for router return types ([eb20b2f](https://github.com/ismetkizgin/cl-serve/commit/eb20b2f9cd54242c6cd17d8881f437ef8c47ed03))
+
 ## 1.6.0 (2020-10-23)
 
 
