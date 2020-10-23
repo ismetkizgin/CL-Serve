@@ -28,7 +28,7 @@ class ComponentMenuTransactions {
             this._datacontext.query(`SELECT * FROM tblComponentMenu WHERE ComponentMenuID=?`, [ComponentMenuID], (error, result) => {
                 if (!error) {
                     if (result.length > 0)
-                        resolve(result);
+                        resolve(result[0]);
                     else
                         reject({ status: HttpStatusCode.NOT_FOUND, message: 'No component menu registered to the system was found.' });
                 }
