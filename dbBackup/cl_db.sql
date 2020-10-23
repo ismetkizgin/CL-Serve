@@ -46,7 +46,7 @@ CREATE TABLE `tblBlog` (
 CREATE TABLE `tblBlogMenu` (
   `BlogMenuID` int NOT NULL,
   `BlogMenuName` varchar(150) NOT NULL,
-  `BlogMenuDescrıptıon` varchar(250) NOT NULL
+  `BlogMenuDescription` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

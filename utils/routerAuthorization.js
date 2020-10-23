@@ -28,5 +28,10 @@ module.exports = {
         DELETE: {
             Authorize: [Roles.Root, Roles.Administrator]
         }
+    },
+    blog_menu: {
+        POST: {
+            Authorize: [Roles.Root, Roles.Administrator]
+        },
     }
 }
