@@ -12,9 +12,9 @@ class Authorization {
             if (!auth || auth.indexOf(req.decode.UserTypeName) != -1)
                 next()
             else
-                res.status(HttpStatusCode.UNAUTHORIZED).json({ message: "Unauthorized transaction." });
+                res.status(HttpStatusCode.UNAUTHORIZED).send('Unauthorized transaction.');
         } catch (error) {
-            res.status(error.status || 500).json({ message: error.message });
+            res.status(error.status || 500).send(error.message);
         }
     }
 
@@ -24,11 +24,11 @@ class Authorization {
             if (result.findIndex(
                 (statusName) => statusName.UserTypeName == req.body.UserTypeName
             ) == -1)
-                res.status(HttpStatusCode.UNAUTHORIZED).json('Unauthorized transaction! You cannot do any action on this user type.');
+                res.status(HttpStatusCode.UNAUTHORIZED).send('Unauthorized transaction! You cannot do any action on this user type.');
             else
                 next();
         } catch (error) {
-            res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json(error.message);
+            res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
         }
     }
 }
