@@ -53,6 +53,23 @@ class BlogMenuTransactions {
             });
         });
     }
+
+    listAsync(values) {
+        const limitAndOffset = values.offset == null ? `${values.limit == null ? '' : `LIMIT ${values.limit}`}` : `LIMIT ${values.offset},${values.limit}`;
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`SELECT * FROM tblBlogMenu ORDER BY BlogMenuName ASC ${limitAndOffset}`, (error, result) => {
+                if (!error) {
+                    if (result.length > 0)
+                        resolve(result);
+                    else
+                        reject({ status: HttpStatusCode.NOT_FOUND, message: 'No blog menu registered to the system was found.' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
 }
 
 module.exports = BlogMenuTransactions;
