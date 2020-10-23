@@ -31,7 +31,7 @@ router.delete('/user', tokenControl, authControl, userValidator.delete, async (r
     try {
         await userTransactions.findAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
         const result = await userTransactions.deleteAsync(req.body.UserID);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         if (error.status == 404)
             res.status(HttpStatusCode.UNAUTHORIZED).send('User is not registered in the system or unauthorized operation.');
@@ -45,7 +45,7 @@ router.put('/user', tokenControl, authControl, userValidator.update, userInsertA
         await userTransactions.findAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
         req.body.UserDateOfBirth = moment(new Date(req.body.UserDateOfBirth)).format('YYYY/MM/DD');
         const result = await userTransactions.updateAsync(req.body);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         if (error.status == 404)
             res.status(HttpStatusCode.UNAUTHORIZED).send('User is not registered in the system or unauthorized operation.');
@@ -56,8 +56,9 @@ router.put('/user', tokenControl, authControl, userValidator.update, userInsertA
 
 router.post('/user', tokenControl, authControl, userValidator.insert, userInsertAuthControl, async (req, res) => {
     try {
+        req.body.UserDateOfBirth = moment(new Date(req.body.UserDateOfBirth)).format('YYYY/MM/DD');
         const result = await userTransactions.insertAsync(req.body);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         console.log(error);
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
