@@ -22,7 +22,7 @@ router.post('/login', authValidator.login, async (req, res) => {
 router.delete('/my-account', tokenControl, async (req, res) => {
     try {
         const result = await userTransactions.deleteAsync(req.decode.UserID);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
@@ -33,7 +33,7 @@ router.put('/my-account', tokenControl, authValidator.update, async (req, res) =
         await userTransactions.passwordControlAsync({ UserID: req.decode.UserID, UserPassword: req.body.UserPassword });
         req.body.UserDateOfBirth = moment(new Date(req.body.UserDateOfBirth)).format('YYYY/MM/DD');
         const result = await userTransactions.updateAsync(Object.assign(req.body, { UserID: req.decode.UserID }));
-        res.json(result);
+        res.send(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
@@ -42,7 +42,7 @@ router.put('/my-account', tokenControl, authValidator.update, async (req, res) =
 router.put('/change-password', tokenControl, authValidator.changePassword, async (req, res) => {
     try {
         const result = await userTransactions.changePasswordAsync(Object.assign(req.body, { UserID: req.decode.UserID }));
-        res.json(result);
+        res.send(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }

@@ -10,7 +10,7 @@ const HttpStatusCode = require('http-status-codes');
 router.post('/blog-menu', tokenControl, authControl, blogMenuValidator.insert, async (req, res) => {
     try {
         const result = await blogMenuTransactions.insertAsync(req.body);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
@@ -19,7 +19,7 @@ router.post('/blog-menu', tokenControl, authControl, blogMenuValidator.insert, a
 router.put('/blog-menu', tokenControl, authControl, blogMenuValidator.update, async (req, res) => {
     try {
         const result = await blogMenuTransactions.updateAsync(req.body);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
@@ -28,7 +28,7 @@ router.put('/blog-menu', tokenControl, authControl, blogMenuValidator.update, as
 router.delete('/blog-menu', tokenControl, authControl, blogMenuValidator.delete, async (req, res) => {
     try {
         const result = await blogMenuTransactions.deleteAsync(req.body.BlogMenuID);
-        res.json(result);
+        res.send(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
     }
