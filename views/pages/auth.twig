@@ -1,0 +1,122 @@
+<div class="content-page tabcontent" id="tabAuth">
+            <div class="content-code"></div>
+            <div class="content">
+                <div class="overflow-hidden content-section">
+                    <h1>Auth Transacsions</h1>
+                    <p>The user performs the login, sign up and account delete operations with the following examples.</p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Get List</h2>
+                    <pre><code>
+#Request Example
+GET {{ apiUrl }}login
+{
+    "UserEmail": cl@project.com
+    "UserPassword": password
+}
+        
+Result Example:
+[
+    "result": {
+        "UserID": 2,
+        "UserFirstName": "İsmet",
+        "UserLastName": "Kizgin",
+        "UserEmail": "cl@project.com",
+        "UserDateOfBirth": "2020-10-15T00:00:00.000Z",
+        "UserTypeName": "Root"
+    },
+    "token":"SECRET-TOKEN"
+]
+        </code></pre>
+                    <p>For the list get, you need to make a GET call to the URL below :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}login</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Add</h2>
+                    <pre><code>
+#Request Example
+DELETE {{ apiUrl }}my-account
+{
+    "UserID" : 1
+}
+        
+Reusult Example:
+{
+    "message": "Deletion succeeded."
+}
+        </code></pre>
+                    <p>For the add transaction, you need to make a POST call to the URL below :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}my-account</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Update</h2>
+                    <pre><code>
+#Request Example
+PUT {{ apiUrl }}my-account
+{
+    "UserFirstName": "İsmet",
+    "UserLastName": "Kizginn",
+    "UserEmail": "cl@project.com",
+    "UserDateOfBirth": "2020-10-15T00:00:00.000Z",
+}
+        
+Reusult Example:
+{
+    "message": "User information has been updated."
+}
+        </code></pre>
+                    <p>For the update transaction, you need to make a PUT call to the URL below :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}my-account</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Delete</h2>
+                    <pre><code>
+#Request Example
+PUT {{ apiUrl }}change-password
+{
+    "UserPassword": password,
+    "UserNewPassword": paswordd
+}
+        
+Reusult Example:
+{
+    "message": "The user password has been changed successfully."
+}
+        </code></pre>
+                    <p>For the delete transaction, you need to make a DELETE call to the URL below :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}change-password</code>
+                    </p>
+                </div>
+<div>
+
+</div>
+                <div class="overflow-hidden content-section" >
+                    <h2>Token Decode</h2>
+                    <pre><code>
+#Request Example
+GET {{ apiUrl }}token-decode
+
+Result Example:
+{
+        "UserID": 2,
+        "UserTypeName": "Root",
+        "iat": 1603472159,
+        "exp": 1604076959
+}
+
+        </code></pre>
+        <p>For the token decode, you need to make a GET call to the URL below:
+            <code class="higlighted">{{ apiUrl }}token-decode</code>
+                </div>
+
+
+            </div>
+
+        </div>
