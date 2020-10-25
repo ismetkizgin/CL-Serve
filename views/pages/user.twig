@@ -1,0 +1,153 @@
+<div class="content-page tabcontent" id="tabUser">
+            <div class="content-code"></div>
+            <div class="content">
+                <div class="overflow-hidden content-section">
+                    <h1>User Transactions</h1>
+                    <p>The user performs the user add, update, delete, list and get information operations with the following examples.</p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>User Add</h2>
+                    <pre><code>
+#Request Example
+POST {{ apiUrl }}user
+{
+    "UserFirstName" : cl,
+    "UserLastName" : project,
+    "UserEmail" : clproject@hotmail.com,
+    "UserDateOfBirth" : 2020-10-15T00:00:00.000Z,
+    "UserTypeName" : Editor,
+    "UserPassword" : clproje  
+}
+                                
+Reusult Example:
+{
+    "message": "User registration has taken place." 
+}
+        </code></pre>
+                    <p>For the add user transaction, you need to make a POST call to the URL below. User must login for this operation:
+                        <br>
+                        <code class="higlighted" >{{ apiUrl }}user</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>USER UPDATE</h2>
+                    <pre><code>
+#Request Example
+PUT {{ apiUrl }}user
+{
+    "UserID": 12,
+    "UserFirstName": "cl",
+    "UserLastName": "project",
+    "UserEmail": "clproject@hotmail.com",
+    "UserDateOfBirth": "2020-10-16T00:00:00.000Z",
+    "UserTypeName": "Editor"          
+}
+                                
+Reusult Example:
+{   
+    "message": "User information has been updated."
+}
+        </code></pre>
+                    <p>For the update transaction, you need to make a PUT call to the URL below. User must login for this operation::
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}user</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>USER DELETE</h2>
+                    <pre><code>
+#Request Example
+DELETE {{ apiUrl }}user                        
+{
+    "UserID" : 11    
+}
+                                                      
+Reusult Example:
+{
+    "message": "Deletion succeeded."
+}
+        </code></pre>
+                    <p>For the delete user transaction, you need to make a DELETE call to the URL below. User must login for this operation: :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}user</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>USER LİST</h2>
+                    <pre><code>
+#Request Example
+GET {{ apiUrl }}user                             
+Result Example:
+[
+  {
+    "UserID": 11,
+    "UserFirstName": "cl",
+    "UserLastName": "project",
+    "UserEmail": "clproject@hotmail.com",
+    "UserDateOfBirth": "2020-10-16T00:00:00.000Z",
+    "UserTypeName": "Developer"
+  },
+  {
+    "UserID": 12,
+    "UserFirstName": "cl",
+    "UserLastName": "project",
+    "UserEmail": "clprojectd@hotmail.com",
+    "UserDateOfBirth": "2020-10-16T00:00:00.000Z",
+    "UserTypeName": "Developer"
+  },
+  ...
+]
+                               
+        </code></pre>
+                    <p>For the list get, you need to make a GET call to the URL below. User must login for this operation:
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}user</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <pre><code>
+                        
+#Request Example
+GET {{ apiUrl }}user
+{
+    "limit": 1,
+    "offset": 0                        
+}
+                        
+Reusult Example:    
+{
+    "UserID": 11,
+    "UserFirstName": "cl",
+    "UserLastName": "project",
+    "UserEmail": "clproject@hotmail.com",
+    "UserDateOfBirth": "2020-10-16T00:00:00.000Z",
+    "UserTypeName": "Developer"                                   
+}
+        </code></pre>
+          </div>                          
+            
+            <div class="overflow-hidden content-section">
+                <h2>USER İNFORMATİON</h2>
+        <pre><code>
+ #Request Example
+GET {{ apiUrl }}user/12                
+Result Example:
+{
+    "UserID": 12,
+    "UserFirstName": "cl",
+    "UserLastName": "project",
+    "UserEmail": "clproject@hotmail.com",
+    "UserDateOfBirth": "2020-10-16T00:00:00.000Z",
+    "UserTypeName": "Developer"    
+},
+  
+      </code></pre>
+       <p>For the list get, you need to make a GET call to the URL below. User must login for this operation:
+       <br>
+        <code class="higlighted">{{ apiUrl }}user</code>
+     </p>
+   </div>
+
+ 
+        
+    </div>
