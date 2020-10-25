@@ -1,0 +1,54 @@
+<div class="content-page tabcontent" id="tabComponentMenu">
+            <div class="content-code"></div>
+            <div class="content">
+                <div class="overflow-hidden content-section">
+                    <h1>Component Menu Transacsions</h1>
+                    <p>The user performs the components add, update, delete, list and get information operations with the following examples.
+                    </p>
+                </div>
+
+                <div class="overflow-hidden content-section">
+                    <h2>COMPONENT MENU LİST</h2>
+                    <pre><code>
+#Request Example
+GET https://cl-serve.herokuapp.com/component-menu
+                                
+Result Example:
+[
+ {
+    "ComponentMenuID": 21,
+    "ComponentMenuName": "cl",
+    "ComponentMenuDescription": "cl project"
+ },
+ {
+    "ComponentMenuID": 4,
+    "ComponentMenuName": "cl",
+    "ComponentMenuDescription": "cl project"
+ },
+ ...
+
+]
+                               
+        </code></pre>
+                    <p>For the list get, you need to make a GET call to the URL below :
+                        <br>
+                        <code class="higlighted" id="path">test</code>
+                    </p>
+                </div>
+            
+            <div class="overflow-hidden content-section">
+        <pre><code>
+#Request Example
+GET http://cl-serve.herokuapp.com/component-menu/21    
+              
+Result Example:
+{
+    "ComponentMenuID": 21,
+    "ComponentMenuName": "cl",
+    "ComponentMenuDescription": "cl project"
+}
+
+    </code></pre>
+    </div>   
+        
+    </div>
