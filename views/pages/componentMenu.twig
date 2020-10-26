@@ -70,7 +70,6 @@ Reusult Example:
                     <pre><code>
 #Request Example
 GET {{ apiUrl }}component-menu 
-
 Result Example:
 [
   {
@@ -85,6 +84,20 @@ Result Example:
   },
   ...
 ]
+
+#Request Example
+GET {{ apiUrl }}component-menu
+{
+    "limit": 1,
+    "offset": 0                        
+}
+                        
+Reusult Example:    
+{
+    "ComponentMenuID": 21,
+    "ComponentMenuName": "cl",
+    "ComponentMenuDescription": "cl project"                            
+}
                                
         </code></pre>
                     <p>For the list get, you need to make a GET call to the URL below :
@@ -98,7 +111,6 @@ Result Example:
         <pre><code>
 #Request Example
 GET {{ apiUrl }}component-menu/21               
-
 Result Example:
 {
     "ComponentMenuID": 21,
