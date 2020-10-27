@@ -8,6 +8,7 @@ app.get('/', function (req, res) {
 
 app.use(routers.authRouter);
 app.use(routers.userRouter);
+app.use(routers.componentRouter);
 app.use(routers.componentMenuRouter);
 app.use(routers.blogMenuRouter);
 

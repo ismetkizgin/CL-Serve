@@ -42,5 +42,10 @@ module.exports = {
         DELETE: {
             Authorize: [Roles.Root, Roles.Administrator]
         }
+    },
+    component: {
+        POST: {
+            Authorize: [Roles.Root, Roles.Administrator, Roles.Developer]
+        },
     }
 }
