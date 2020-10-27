@@ -45,6 +45,17 @@ class ComponentMenuValidator {
             res.status(HttpStatusCode.EXPECTATION_FAILED).send('Must have correct data entry.');
         }
     }
+
+    static async find(req, res, next) {
+        try {
+            await joi.object({
+                ComponentID: joi.number().min(1).required(),
+            }).validateAsync({ ComponentID: parseInt(req.params.ComponentID) });
+            next();
+        } catch (error) {
+            res.status(HttpStatusCode.EXPECTATION_FAILED).send('Must have correct data entry.');
+        }
+    }
 }
 
 module.exports = ComponentMenuValidator;

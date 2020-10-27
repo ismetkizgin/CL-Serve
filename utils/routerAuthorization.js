@@ -55,5 +55,9 @@ module.exports = {
             Authorize: [Roles.Root, Roles.Administrator, Roles.Developer],
             Individual_Authorize: [Roles.Developer]
         },
+        GET: {
+            Authorize: [Roles.Root, Roles.Administrator, Roles.Developer],
+            Individual_Authorize: [Roles.Developer]
+        },
     }
 }
