@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 22 Eki 2020, 23:16:37
--- Sunucu sürümü: 8.0.21-0ubuntu0.20.04.4
+-- Üretim Zamanı: 27 Eki 2020, 20:20:53
+-- Sunucu sürümü: 8.0.22-0ubuntu0.20.04.2
 -- PHP Sürümü: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -46,7 +46,7 @@ CREATE TABLE `tblBlog` (
 CREATE TABLE `tblBlogMenu` (
   `BlogMenuID` int NOT NULL,
   `BlogMenuName` varchar(150) NOT NULL,
-  `BlogMenuDescription` varchar(250) NOT NULL
+  `BlogMenuDescription` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -62,7 +62,7 @@ CREATE TABLE `tblComponent` (
   `ComponentName` varchar(100) NOT NULL,
   `ComponentDescription` varchar(250) NOT NULL,
   `ComponentCode` text NOT NULL,
-  `ComponentState` tinyint(1) NOT NULL
+  `ComponentState` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -135,17 +135,43 @@ INSERT INTO `tblUserType` (`UserTypeName`, `UserTypeNumber`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Görünüm yapısı durumu `vwComponentList`
+-- (Asıl görünüm için aşağıya bakın)
+--
+CREATE TABLE `vwComponentList` (
+`ComponentCode` text
+,`ComponentDescription` varchar(250)
+,`ComponentID` int
+,`ComponentName` varchar(100)
+,`ComponentState` tinyint(1)
+,`MenuID` int
+,`UserID` int
+,`UserNameSurname` varchar(101)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Görünüm yapısı durumu `vwUserList`
 -- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `vwUserList` (
-`UserID` int
-,`UserFirstName` varchar(50)
-,`UserLastName` varchar(50)
+`UserDateOfBirth` date
 ,`UserEmail` varchar(100)
-,`UserDateOfBirth` date
+,`UserFirstName` varchar(50)
+,`UserID` int
+,`UserLastName` varchar(50)
 ,`UserTypeName` varchar(50)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Görünüm yapısı `vwComponentList`
+--
+DROP TABLE IF EXISTS `vwComponentList`;
+
+CREATE VIEW `vwComponentList`  AS  select `tblComponent`.`ComponentID` AS `ComponentID`,`tblComponent`.`UserID` AS `UserID`,`tblComponent`.`MenuID` AS `MenuID`,`tblComponent`.`ComponentName` AS `ComponentName`,`tblComponent`.`ComponentDescription` AS `ComponentDescription`,`tblComponent`.`ComponentCode` AS `ComponentCode`,`tblComponent`.`ComponentState` AS `ComponentState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblComponent` join `tblUser` on((`tblComponent`.`UserID` = `tblUser`.`UserID`))) ;
 
 -- --------------------------------------------------------
 
@@ -180,6 +206,7 @@ ALTER TABLE `tblBlogMenu`
 --
 ALTER TABLE `tblComponent`
   ADD PRIMARY KEY (`ComponentID`),
+  ADD UNIQUE KEY `MenuID_2` (`MenuID`,`ComponentName`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `MenuID` (`MenuID`);
 
@@ -225,19 +252,19 @@ ALTER TABLE `tblBlog`
 -- Tablo için AUTO_INCREMENT değeri `tblBlogMenu`
 --
 ALTER TABLE `tblBlogMenu`
-  MODIFY `BlogMenuID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `BlogMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblComponent`
 --
 ALTER TABLE `tblComponent`
-  MODIFY `ComponentID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ComponentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblComponentMenu`
 --
 ALTER TABLE `tblComponentMenu`
-  MODIFY `ComponentMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ComponentMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblProject`
@@ -249,7 +276,7 @@ ALTER TABLE `tblProject`
 -- Tablo için AUTO_INCREMENT değeri `tblUser`
 --
 ALTER TABLE `tblUser`
-  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
