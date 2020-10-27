@@ -16,10 +16,7 @@ POST {{ apiUrl }}component-menu
 }
                     
 Reusult Example:
-{
-    "message": "Component menu registration completed."
-}
-        </code></pre>
+Component menu registration completed.</code></pre>
                     <p>For the add component menu transaction, you need to make a POST call to the URL below. :
                         <br>
                         <code class="higlighted">{{ apiUrl }}component-menu</code>
@@ -37,10 +34,7 @@ PUT {{ apiUrl }}component-menu
 }
                                 
 Reusult Example:
-{   
-    "message": "Component menu information has been updated."
-}
-        </code></pre>
+Component menu information has been updated.</code></pre>
                     <p>For the update transaction, you need to make a PUT call to the URL below :
                         <br>
                         <code class="higlighted" >{{ apiUrl }}component-menu</code>
@@ -56,10 +50,7 @@ DELETE {{ apiUrl }}component-menu
 }
                                                       
 Reusult Example:
-{
-    "message": "Deletion succeeded."
-}
-        </code></pre>
+Deletion succeeded.</code></pre>
                     <p>For the delete component menu transaction, you need to make a DELETE call to the URL below. :
                         <br>
                         <code class="higlighted">{{ apiUrl }}component-menu</code>
@@ -69,20 +60,21 @@ Reusult Example:
                     <h2>Component Menu LİST</h2>
                     <pre><code>
 #Request Example
-GET {{ apiUrl }}component-menu 
+GET {{ apiUrl }}component-menu
+
 Result Example:
 [
-  {
-    "ComponentMenuID": 21,
-    "ComponentMenuName": "cl",
-    "ComponentMenuDescription": "cl project"
-  },
-  {
-    "ComponentMenuID": 4,
-    "ComponentMenuName": "cl",
-    "ComponentMenuDescription": "cl project"
-  },
-  ...
+    {
+        "ComponentMenuID": 21,
+        "ComponentMenuName": "cl",
+        "ComponentMenuDescription": "cl project"
+    },
+    {
+        "ComponentMenuID": 4,
+        "ComponentMenuName": "cl",
+        "ComponentMenuDescription": "cl project"
+    },
+    ...
 ]
 
 #Request Example
@@ -97,9 +89,7 @@ Reusult Example:
     "ComponentMenuID": 21,
     "ComponentMenuName": "cl",
     "ComponentMenuDescription": "cl project"                            
-}
-                               
-        </code></pre>
+}</code></pre>
                     <p>For the list get, you need to make a GET call to the URL below :
                         <br>
                         <code class="higlighted">{{ apiUrl }}component-menu</code>
@@ -110,17 +100,17 @@ Reusult Example:
                 <h2>Component Menu İnformation</h2>
         <pre><code>
 #Request Example
-GET {{ apiUrl }}component-menu/21               
+GET {{ apiUrl }}component-menu/21
+
 Result Example:
 {
     "ComponentMenuID": 21,
     "ComponentMenuName": "cl",
     "ComponentMenuDescription": "cl project"
-} 
-      </code></pre>
+}</code></pre>
        <p>For the list get, you need to make a GET call to the URL below :
        <br>
-        <code class="higlighted" >{{ apiUrl }}component-menu/21</code>
+        <code class="higlighted" >{{ apiUrl }}component-menu/:ComponentMenuID</code>
      </p>
    </div>
 </div>       
