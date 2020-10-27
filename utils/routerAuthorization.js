@@ -51,5 +51,9 @@ module.exports = {
             Authorize: [Roles.Root, Roles.Administrator, Roles.Developer],
             Individual_Authorize: [Roles.Developer]
         },
+        DELETE: {
+            Authorize: [Roles.Root, Roles.Administrator, Roles.Developer],
+            Individual_Authorize: [Roles.Developer]
+        },
     }
 }
