@@ -21,6 +21,40 @@ class ComponentTransactions {
             });
         });
     }
+
+    updateAsync(values) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`UPDATE tblComponent SET ? WHERE ComponentID=?`, [values, values.ComponentID], (error, result) => {
+                if (!error) {
+                    if (result.affectedRows)
+                        resolve('Component information has been updated.');
+                    else
+                        reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: 'An error occurred while updating component information !' });
+                }
+                else {
+                    reject(error.errno == 1062 ? { status: HttpStatusCode.CONFLICT, message: 'There is such component menu !' } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
+
+    findAsync(ComponentID) {
+        console.log(ComponentID);
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`SELECT * FROM tblComponent WHERE ComponentID=?`, [ComponentID], (error, result) => {
+                if (!error) {
+                    console.log(result);
+                    if (result.length > 0)
+                        resolve(result[0]);
+                    else
+                        reject({ status: HttpStatusCode.NOT_FOUND, message: 'No component registered to the system was found.' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
 }
 
 module.exports = ComponentTransactions;
