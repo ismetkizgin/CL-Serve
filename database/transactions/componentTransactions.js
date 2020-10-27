@@ -40,7 +40,7 @@ class ComponentTransactions {
 
     findAsync(ComponentID) {
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT * FROM tblComponent WHERE ComponentID=?`, [ComponentID], (error, result) => {
+            this._datacontext.query(`SELECT * FROM vwComponentList WHERE ComponentID=?`, [ComponentID], (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result[0]);
