@@ -34,7 +34,7 @@ router.delete('/blog-menu', tokenControl, authControl, blogMenuValidator.delete,
     }
 });
 
-router.get('/blog-menu/', tokenControl, authControl, blogMenuValidator.list, async (req, res) => {
+router.get('/blog-menu/', blogMenuValidator.list, async (req, res) => {
     try {
         const result = await blogMenuTransactions.listAsync(req.body);
         res.json(result);
