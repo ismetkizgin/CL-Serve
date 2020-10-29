@@ -1,7 +1,7 @@
 const joi = require('joi');
 const HttpStatusCode = require('http-status-codes');
 
-class ComponentMenuValidator {
+class ComponentValidator {
     constructor() { }
 
     static async insert(req, res, next) {
@@ -71,4 +71,4 @@ class ComponentMenuValidator {
     }
 }
 
-module.exports = ComponentMenuValidator;
+module.exports = ComponentValidator;
