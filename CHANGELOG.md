@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.8.0 (2020-10-29)
+
+
+### Features
+
+* added blog list router ([5c51d6f](https://github.com/ismetkizgin/cl-serve/commit/5c51d6fe14f82c3ed177921de3db96f69040e0db))
+* added find blog router ([458cd68](https://github.com/ismetkizgin/cl-serve/commit/458cd682db93686cd03c6adb4832e531ad278bd9))
+* added blog delete router ([9a50ff8](https://github.com/ismetkizgin/cl-serve/commit/9a50ff8220966d3181d10d2c1b50ce67f3d3783b))
+* added blog update router ([d5f1e1a](https://github.com/ismetkizgin/cl-serve/commit/d5f1e1afd5ac6c84732a278b80f19e1f48c6db6f))
+* added blog insertion router ([cd382c8](https://github.com/ismetkizgin/cl-serve/commit/cd382c8c788e59e0b82cec767235a7f42ad48d7d))
+* added validator for delete my account router ([aba5b3b](https://github.com/ismetkizgin/cl-serve/commit/aba5b3b401f450eaba87bf8c3fe82239110083cb))
+* added password control router ([d3635a7](https://github.com/ismetkizgin/cl-serve/commit/d3635a7e66ff84a33119a1f17b79f56b0669f5b4))
+
 ## 1.7.0 (2020-10-27)
 
 
