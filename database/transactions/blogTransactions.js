@@ -37,6 +37,38 @@ class BlogTransactions {
             });
         });
     }
+
+    findAsync(BlogID) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`SELECT * FROM vwBlogList WHERE BlogID=?`, [BlogID], (error, result) => {
+                if (!error) {
+                    if (result.length > 0)
+                        resolve(result[0]);
+                    else
+                        reject({ status: HttpStatusCode.NOT_FOUND, message: 'No blog registered to the system was found.' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
+
+    deleteAsync(BlogID) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`DELETE FROM tblBlog WHERE BlogID=?`, [BlogID], (error, result) => {
+                if (!error) {
+                    if (result.affectedRows)
+                        resolve('Deletion succeeded.');
+                    else
+                        reject({ status: HttpStatusCode.GONE, message: 'There is no such blog !' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
 }
 
 module.exports = BlogTransactions;

@@ -67,6 +67,10 @@ module.exports = {
         PUT: {
             Authorize: [Roles.Root, Roles.Administrator, Roles.Editor],
             Individual_Authorize: [Roles.Editor]
+        },
+        DELETE: {
+            Authorize: [Roles.Root, Roles.Administrator, Roles.Developer],
+            Individual_Authorize: [Roles.Developer]
         }
     }
 }
