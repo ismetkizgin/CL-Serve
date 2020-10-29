@@ -11,7 +11,7 @@ class ComponentValidator {
                 ComponentDescription: joi.string().required(),
                 ComponentCode: joi.string().required(),
                 ComponentState: joi.boolean(),
-                MenuID: joi.number().required()
+                ComponentMenuID: joi.number().required()
             }).validateAsync(req.body);
             next();
         } catch (error) {
@@ -27,7 +27,7 @@ class ComponentValidator {
                 ComponentDescription: joi.string().required(),
                 ComponentCode: joi.string().required(),
                 ComponentState: joi.boolean(),
-                MenuID: joi.number().required()
+                ComponentMenuID: joi.number().required()
             }).validateAsync(req.body);
             next();
         } catch (error) {
