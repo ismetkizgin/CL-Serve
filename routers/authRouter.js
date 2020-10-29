@@ -19,7 +19,7 @@ router.post('/login', authValidator.login, async (req, res) => {
     }
 });
 
-router.delete('/my-account', tokenControl, async (req, res) => {
+router.delete('/my-account', tokenControl, authValidator.delete, async (req, res) => {
     try {
         const result = await userTransactions.deleteAsync(req.decode.UserID);
         res.json(result);
