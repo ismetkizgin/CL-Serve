@@ -18,4 +18,20 @@ router.post('/blog', tokenControl, authControl, blogValidator.insert, async (req
     }
 });
 
+router.put('/blog', tokenControl, authControl, blogValidator.update, async (req, res) => {
+    try {
+        if (routerAuthorization[req.method].Individual_Authorize.indexOf(req.decode.UserTypeName) != -1) {
+            const findBlog = await blogTransactions.findAsync(req.body.BlogID);
+            if (findBlog.UserID != req.decode.UserID) {
+                res.status(HttpStatusCode.UNAUTHORIZED).send('Unauthorized transaction !')
+                return;
+            }
+        }
+        const result = await blogTransactions.updateAsync(req.body);
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
 module.exports = router;
