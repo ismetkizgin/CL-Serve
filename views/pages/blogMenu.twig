@@ -18,18 +18,15 @@ POST {{ apiUrl }}blog-menu
 }
         
 Result Example:
-{
-    "message" : "Blog menu registration completed."
-}
-        </code></pre>
-			<p>For the add blog menu, you need to make a POST call to the URL below. User must login for this operation.:
-				<br>
-				<code class="higlighted">{{ apiUrl }}blog-menu</code>
-			</p>
-		</div>
-		<div class="overflow-hidden content-section">
-			<h2>Blog Menu Update</h2>
-			<pre><code>
+Blog menu registration completed.</code></pre>
+                    <p>For the add blog menu, you need to make a POST call to the URL below. User must login for this operation:
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}blog-menu</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Blog Menu Update</h2>
+                    <pre><code>
 #Request Example
 PUT {{ apiUrl }}blog-menu
 {
@@ -39,18 +36,15 @@ PUT {{ apiUrl }}blog-menu
 }
         
 Reusult Example:
-{
-    "message": "Blog menu information has been updated."
-}
-        </code></pre>
-			<p>For the update blog menu, you need to make a PUT call to the URL below :
-				<br>
-				<code class="higlighted">{{ apiUrl }}blog-menu</code>
-			</p>
-		</div>
-		<div class="overflow-hidden content-section">
-			<h2>Blog Menu Delete</h2>
-			<pre><code>
+Blog menu information has been updated.</code></pre>
+                    <p>For the update blog menu, you need to make a PUT call to the URL below.User must login for this operation:
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}blog-menu</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Blog Menu Delete</h2>
+                    <pre><code>
 #Request Example
 DELETE {{ apiUrl }}blog-menu
 {
@@ -58,18 +52,15 @@ DELETE {{ apiUrl }}blog-menu
 }
         
 Reusult Example:
-{
-    "message": "Deletion succeeded."
-}
-        </code></pre>
-			<p>For the list blog menu, you need to make a DELETE call to the URL below :
-				<br>
-				<code class="higlighted">{{ apiUrl }}blog-menu</code>
-			</p>
-		</div>
-		<div class="overflow-hidden content-section">
-			<h2>Blog Menu List</h2>
-			<pre><code>
+Deletion succeeded.</code></pre>
+             <p>For the delete blog menu, you need to make a DELETE call to the URL below.User must login for this operation: 
+                <br>
+                        <code class="higlighted">{{ apiUrl }}blog-menu</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>Blog Menu List</h2>
+                    <pre><code>
 #Request Example
 GET {{ apiUrl }}blog-menu
 
@@ -102,35 +93,30 @@ Result Example:
         "BlogMenuName": "Lorem ipsum",
         "BlogMenuDescription": "Lorem ipsum dolor sit amet."
     }
-]
-        </code></pre>
-			<p>For the list get blog menu, you need to make a GET call to the URL below :
-				<br>
-				<code class="higlighted">{{ apiUrl }}blog-menu</code>
-			</p>
-		</div>
-		<div></div>
-		<div class="overflow-hidden content-section">
-			<h2>Blog Menu information</h2>
-			<pre><code>
+]</code></pre>
+                    <p>For the list get blog menu, you need to make a GET call to the URL below.User must login for this operation:
+                        <br>
+                        <code class="higlighted" >{{ apiUrl }}blog-menu</code>
+                    </p>
+                </div>
+<div>
+</div>
+                <div class="overflow-hidden content-section" >
+                    <h2>Blog Menu information</h2>
+                    <pre><code>
 #Request Example
 GET {{ apiUrl }}blog-menu/2
 
 Result Example:
-
-    {
-        "BlogMenuID": 2,
-        "BlogMenuName": "Lorem ipsum2",
-        "BlogMenuDescription": "Lorem ipsum dolor sit amet."
-    }
-    
-
-        </code></pre>
-			<p>For the Blog Menu Information, you need to make a GET call to the URL below. 
-				                        User must login for this operation.:
-				<br>
-				<code class="higlighted">{{ apiUrl }}blog-menu/2</code>
-			</p>
-		</div>
-	</div>
-</div>
+{
+    "BlogMenuID": 2,
+    "BlogMenuName": "Lorem ipsum2",
+    "BlogMenuDescription": "Lorem ipsum dolor sit amet."
+}</code></pre>
+                    <p>For the Blog Menu Information, you need to make a GET call to the URL below. 
+                        User must login for this operation:
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}blog-menu/:BlogMenuID</code></p>
+                </div>
+            </div>
+        </div>

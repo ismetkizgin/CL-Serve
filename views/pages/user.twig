@@ -16,14 +16,11 @@ POST {{ apiUrl }}user
     "UserEmail" : "clproject@hotmail.com",
     "UserDateOfBirth" : "2020-10-15",
     "UserTypeName" : "Editor",
-    "UserPassword" : clproje  
+    "UserPassword" : "clproje" 
 }
                                 
 Reusult Example:
-{
-    "message": "User registration has taken place." 
-}
-        </code></pre>
+User registration has taken place.</code></pre>
 			<p>For the add user transaction, you need to make a POST call to the URL below. User must login for this operation:
 				<br>
 				<code class="higlighted">{{ apiUrl }}user</code>
@@ -44,11 +41,8 @@ PUT {{ apiUrl }}user
 }
                                 
 Reusult Example:
-{   
-    "message": "User information has been updated."
-}
-        </code></pre>
-			<p>For the update transaction, you need to make a PUT call to the URL below. User must login for this operation::
+User information has been updated.</code></pre>
+			<p>For the update user transaction, you need to make a PUT call to the URL below. User must login for this operation:
 				<br>
 				<code class="higlighted">{{ apiUrl }}user</code>
 			</p>
@@ -63,11 +57,8 @@ DELETE {{ apiUrl }}user
 }
                                                       
 Reusult Example:
-{
-    "message": "Deletion succeeded."
-}
-        </code></pre>
-			<p>For the delete user transaction, you need to make a DELETE call to the URL below. User must login for this operation: :
+Deletion succeeded.</code></pre>
+			<p>For the delete user transaction, you need to make a DELETE call to the URL below. User must login for this operation :
 				<br>
 				<code class="higlighted">{{ apiUrl }}user</code>
 			</p>
@@ -76,26 +67,26 @@ Reusult Example:
 			<h2>USER LİST</h2>
 			<pre><code>
 #Request Example
-GET {{ apiUrl }}user                             
+GET {{ apiUrl }}user
 Result Example:
 [
-  {
-    "UserID": 11,
-    "UserFirstName": "cl",
-    "UserLastName": "project",
-    "UserEmail": "clproject@hotmail.com",
-    "UserDateOfBirth": "2020-10-16",
-    "UserTypeName": "Developer"
-  },
-  {
-    "UserID": 12,
-    "UserFirstName": "cl",
-    "UserLastName": "project",
-    "UserEmail": "clprojectd@hotmail.com",
-    "UserDateOfBirth": "2020-10-16",
-    "UserTypeName": "Developer"
-  },
-  ...
+    {
+        "UserID": 11,
+        "UserFirstName": "cl",
+        "UserLastName": "project",
+        "UserEmail": "clproject@hotmail.com",
+        "UserDateOfBirth": "2020-10-16",
+        "UserTypeName": "Developer"
+    },
+    {
+        "UserID": 12,
+        "UserFirstName": "cl",
+        "UserLastName": "project",
+        "UserEmail": "clprojectd@hotmail.com",
+        "UserDateOfBirth": "2020-10-16",
+        "UserTypeName": "Developer"
+    },
+    ...
 ]
         
 #Request Example
@@ -113,9 +104,8 @@ Reusult Example:
     "UserEmail": "clproject@hotmail.com",
     "UserDateOfBirth": "2020-10-16",
     "UserTypeName": "Developer"                                   
-}
-        </code></pre>
-			<p>For the list get, you need to make a GET call to the URL below :
+}</code></pre>
+			<p>For the user list get, you need to make a GET call to the URL below. User must login for this operation :
 				<br>
 				<code class="higlighted">{{ apiUrl }}user</code>
 			</p>
@@ -125,7 +115,8 @@ Reusult Example:
 			<h2>USER İNFORMATİON</h2>
 			<pre><code>
 #Request Example
-GET {{ apiUrl }}user/12                
+GET {{ apiUrl }}user/12
+
 Result Example:
 {
     "UserID": 12,
@@ -134,15 +125,12 @@ Result Example:
     "UserEmail": "clproject@hotmail.com",
     "UserDateOfBirth": "2020-10-16",
     "UserTypeName": "Developer"    
-},
-  
-      </code></pre>
-			<p>For the list get, you need to make a GET call to the URL below. User must login for this operation:
+}</code></pre>
+			<p>For the user list get, you need to make a GET call to the URL below. User must login for this operation:
 				<br>
-				<code class="higlighted">{{ apiUrl }}user</code>
+				<code class="higlighted">{{ apiUrl }}user/:UserID</code>
 			</p>
 		</div>
 
 	</div>
-
 </div>

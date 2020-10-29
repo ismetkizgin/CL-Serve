@@ -26,8 +26,7 @@ Result Example:
         "UserTypeName": "Root"
     },
     "token":"SECRET-TOKEN"
-]
-        </code></pre>
+]</code></pre>
 			<p>For the user login, you need to make a POST call to the URL below :
 				<br>
 				<code class="higlighted">{{ apiUrl }}login</code>
@@ -43,11 +42,8 @@ DELETE {{ apiUrl }}my-account
 }
         
 Reusult Example:
-{
-    "message": "Deletion succeeded."
-}
-        </code></pre>
-			<p>For the add transaction, you need to make a POST call to the URL below.User must login for this operation:
+Deletion succeeded.</code></pre>
+			<p>For the delete transaction, you need to make a DELETE call to the URL below. User must login for this operation:
 				<br>
 				<code class="higlighted">{{ apiUrl }}my-account</code>
 			</p>
@@ -65,10 +61,7 @@ PUT {{ apiUrl }}my-account
 }
         
 Reusult Example:
-{
-    "message": "User information has been updated."
-}
-        </code></pre>
+User information has been updated.</code></pre>
 			<p>For the update transaction, you need to make a PUT call to the URL below.User must login for this operation:
 				<br>
 				<code class="higlighted">{{ apiUrl }}my-account</code>
@@ -85,11 +78,8 @@ PUT {{ apiUrl }}change-password
 }
         
 Reusult Example:
-{
-    "message": "The user password has been changed successfully."
-}
-        </code></pre>
-			<p>For the delete transaction, you need to make a PUT call to the URL below :
+The user password has been changed successfully.</code></pre>
+			<p>For the change password transaction, you need to make a PUT call to the URL below :
 				<br>
 				<code class="higlighted">{{ apiUrl }}change-password</code>
 			</p>
@@ -103,13 +93,11 @@ GET {{ apiUrl }}token-decode
 
 Result Example:
 {
-        "UserID": 2,
-        "UserTypeName": "Root",
-        "iat": 1603472159,
-        "exp": 1604076959
-}
-
-        </code></pre>
+    "UserID": 2,
+    "UserTypeName": "Root",
+    "iat": 1603472159,
+    "exp": 1604076959
+}</code></pre>
 			<p>For the token decode, you need to make a GET call to the URL below.User must login for this operation:
 				<code class="higlighted">{{ apiUrl }}token-decode</code>
 			</p>
