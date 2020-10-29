@@ -1,13 +1,13 @@
-       <div class="content-page tabcontent" id="tabComponentMenu">
-            <div class="content-code"></div>
-            <div class="content">
-                <div class="overflow-hidden content-section">
-                    <h1>Component Menu Transactions</h1>
-                    <p>The user performs the components add, update, delete, list and get information operations with the following examples.</p>
-                </div>
-                <div class="overflow-hidden content-section">
-                    <h2>Component Menu Add</h2>
-                    <pre><code>
+<div class="content-page tabcontent" id="tabComponentMenu">
+	<div class="content-code"></div>
+	<div class="content">
+		<div class="overflow-hidden content-section">
+			<h1>Component Menu Transactions</h1>
+			<p>The user performs the components add, update, delete, list and get information operations with the following examples.</p>
+		</div>
+		<div class="overflow-hidden content-section">
+			<h2>Component Menu Add</h2>
+			<pre><code>
 #Request Example
 POST {{ apiUrl }}component-menu
 {
@@ -17,14 +17,14 @@ POST {{ apiUrl }}component-menu
                     
 Reusult Example:
 Component menu registration completed.</code></pre>
-                    <p>For the add component menu transaction, you need to make a POST call to the URL below. :
-                        <br>
-                        <code class="higlighted">{{ apiUrl }}component-menu</code>
-                    </p>
-                </div>
-                <div class="overflow-hidden content-section">
-                    <h2>Component Menu UPDATE</h2>
-                    <pre><code>
+			<p>For the add component menu transaction, you need to make a POST call to the URL below. User must login for this operation :
+				<br>
+				<code class="higlighted">{{ apiUrl }}component-menu</code>
+			</p>
+		</div>
+		<div class="overflow-hidden content-section">
+			<h2>Component Menu UPDATE</h2>
+			<pre><code>
 #Request Example
 PUT {{ apiUrl }}component-menu
 {
@@ -35,14 +35,14 @@ PUT {{ apiUrl }}component-menu
                                 
 Reusult Example:
 Component menu information has been updated.</code></pre>
-                    <p>For the update transaction, you need to make a PUT call to the URL below :
-                        <br>
-                        <code class="higlighted" >{{ apiUrl }}component-menu</code>
-                    </p>
-                </div>
-                <div class="overflow-hidden content-section">
-                    <h2>Component Menu DELETE</h2>
-                    <pre><code>
+			<p>For the update component menu transaction, you need to make a PUT call to the URL below. User must login for this operation :
+				<br>
+				<code class="higlighted">{{ apiUrl }}component-menu</code>
+			</p>
+		</div>
+		<div class="overflow-hidden content-section">
+			<h2>Component Menu DELETE</h2>
+			<pre><code>
 #Request Example
 DELETE {{ apiUrl }}component-menu                        
 {
@@ -51,17 +51,16 @@ DELETE {{ apiUrl }}component-menu
                                                       
 Reusult Example:
 Deletion succeeded.</code></pre>
-                    <p>For the delete component menu transaction, you need to make a DELETE call to the URL below. :
-                        <br>
-                        <code class="higlighted">{{ apiUrl }}component-menu</code>
-                    </p>
-                </div>
-                <div class="overflow-hidden content-section">
-                    <h2>Component Menu LİST</h2>
-                    <pre><code>
+			<p>For the delete component menu transaction, you need to make a DELETE call to the URL below. User must login for this operation :
+				<br>
+				<code class="higlighted">{{ apiUrl }}component-menu</code>
+			</p>
+		</div>
+		<div class="overflow-hidden content-section">
+			<h2>Component Menu LİST</h2>
+			<pre><code>
 #Request Example
 GET {{ apiUrl }}component-menu
-
 Result Example:
 [
     {
@@ -90,29 +89,27 @@ Reusult Example:
     "ComponentMenuName": "cl",
     "ComponentMenuDescription": "cl project"                            
 }</code></pre>
-                    <p>For the list get, you need to make a GET call to the URL below :
-                        <br>
-                        <code class="higlighted">{{ apiUrl }}component-menu</code>
-                    </p>
-                </div>
+			<p>For the component menu list get, you need to make a GET call to the URL below. User must login for this operation :
+				<br>
+				<code class="higlighted">{{ apiUrl }}component-menu</code>
+			</p>
+		</div>
 
-            <div class="overflow-hidden content-section">
-                <h2>Component Menu İnformation</h2>
-        <pre><code>
+		<div class="overflow-hidden content-section">
+			<h2>Component Menu İnformation</h2>
+			<pre><code>
 #Request Example
 GET {{ apiUrl }}component-menu/21
-
 Result Example:
 {
     "ComponentMenuID": 21,
     "ComponentMenuName": "cl",
     "ComponentMenuDescription": "cl project"
 }</code></pre>
-       <p>For the list get, you need to make a GET call to the URL below :
-       <br>
-        <code class="higlighted" >{{ apiUrl }}component-menu/:ComponentMenuID</code>
-     </p>
-   </div>
-</div>       
-    </div>
-    </div>
+			<p>For the component menu list get, you need to make a GET call to the URL below. User must login for this operation :
+				<br>
+				<code class="higlighted">{{ apiUrl }}component-menu/:ComponentMenuID</code>
+			</p>
+		</div>
+	</div>
+</div></div>

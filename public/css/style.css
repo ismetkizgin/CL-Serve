@@ -155,6 +155,20 @@ pre {
   display: block;
   max-width: 680px;
 }
+.full-content h1,
+.full-content h2,
+.full-content h3,
+.full-content h4,
+.full-content h5,
+.full-content h6,
+.full-content p,
+.full-content table,
+.full-content ul,
+.full-content ol,
+.full-content aside,
+.full-content dl {
+  width: 100%;
+}
 .content h2,
 .content h3,
 .content h4,
