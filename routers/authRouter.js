@@ -48,6 +48,16 @@ router.put('/change-password', tokenControl, authValidator.changePassword, async
     }
 });
 
+router.put('/password-control', tokenControl, authValidator.passwordControl, async (req, res) => {
+    try {
+        const result = await userTransactions.passwordControlAsync({ UserID: req.decode.UserID, UserPassword: req.body.UserPassword });
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
 router.get('/token-decode', tokenControl, async (req, res) => {
     res.json(req.decode);
 });
