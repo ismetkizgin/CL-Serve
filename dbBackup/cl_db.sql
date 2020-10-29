@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 27 Eki 2020, 20:20:53
+-- Üretim Zamanı: 29 Eki 2020, 17:39:32
 -- Sunucu sürümü: 8.0.22-0ubuntu0.20.04.2
 -- PHP Sürümü: 7.4.11
 
@@ -34,7 +34,8 @@ CREATE TABLE `tblBlog` (
   `BlogMenuID` int NOT NULL,
   `BlogTitle` varchar(100) NOT NULL,
   `BlogDescription` varchar(200) NOT NULL,
-  `BlogContent` text NOT NULL
+  `BlogContent` text NOT NULL,
+  `BlogState` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -62,7 +63,8 @@ CREATE TABLE `tblComponent` (
   `ComponentName` varchar(100) NOT NULL,
   `ComponentDescription` varchar(250) NOT NULL,
   `ComponentCode` text NOT NULL,
-  `ComponentState` tinyint(1) NOT NULL DEFAULT '0'
+  `ComponentState` tinyint(1) NOT NULL DEFAULT '0',
+  `ComponentCreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -135,11 +137,29 @@ INSERT INTO `tblUserType` (`UserTypeName`, `UserTypeNumber`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Görünüm yapısı durumu `vwBlogList`
+-- (Asıl görünüm için aşağıya bakın)
+--
+CREATE TABLE `vwBlogList` (
+`BlogContent` text
+,`BlogDescription` varchar(200)
+,`BlogID` int
+,`BlogMenuID` int
+,`BlogState` tinyint(1)
+,`BlogTitle` varchar(100)
+,`UserID` int
+,`UserNameSurname` varchar(101)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Görünüm yapısı durumu `vwComponentList`
 -- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `vwComponentList` (
 `ComponentCode` text
+,`ComponentCreatedDate` datetime
 ,`ComponentDescription` varchar(250)
 ,`ComponentID` int
 ,`ComponentName` varchar(100)
@@ -167,11 +187,20 @@ CREATE TABLE `vwUserList` (
 -- --------------------------------------------------------
 
 --
+-- Görünüm yapısı `vwBlogList`
+--
+DROP TABLE IF EXISTS `vwBlogList`;
+
+CREATE VIEW `vwBlogList`  AS  select `tblBlog`.`BlogID` AS `BlogID`,`tblBlog`.`UserID` AS `UserID`,`tblBlog`.`BlogMenuID` AS `BlogMenuID`,`tblBlog`.`BlogTitle` AS `BlogTitle`,`tblBlog`.`BlogDescription` AS `BlogDescription`,`tblBlog`.`BlogContent` AS `BlogContent`,`tblBlog`.`BlogState` AS `BlogState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblBlog` join `tblUser` on((`tblUser`.`UserID` = `tblBlog`.`UserID`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Görünüm yapısı `vwComponentList`
 --
 DROP TABLE IF EXISTS `vwComponentList`;
 
-CREATE VIEW `vwComponentList`  AS  select `tblComponent`.`ComponentID` AS `ComponentID`,`tblComponent`.`UserID` AS `UserID`,`tblComponent`.`MenuID` AS `MenuID`,`tblComponent`.`ComponentName` AS `ComponentName`,`tblComponent`.`ComponentDescription` AS `ComponentDescription`,`tblComponent`.`ComponentCode` AS `ComponentCode`,`tblComponent`.`ComponentState` AS `ComponentState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblComponent` join `tblUser` on((`tblComponent`.`UserID` = `tblUser`.`UserID`))) ;
+CREATE VIEW `vwComponentList`  AS  select `tblComponent`.`ComponentID` AS `ComponentID`,`tblComponent`.`UserID` AS `UserID`,`tblComponent`.`MenuID` AS `MenuID`,`tblComponent`.`ComponentName` AS `ComponentName`,`tblComponent`.`ComponentDescription` AS `ComponentDescription`,`tblComponent`.`ComponentCreatedDate` AS `ComponentCreatedDate`,`tblComponent`.`ComponentCode` AS `ComponentCode`,`tblComponent`.`ComponentState` AS `ComponentState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblComponent` join `tblUser` on((`tblComponent`.`UserID` = `tblUser`.`UserID`))) ;
 
 -- --------------------------------------------------------
 
@@ -191,6 +220,7 @@ CREATE VIEW `vwUserList`  AS  select `tblUser`.`UserID` AS `UserID`,`tblUser`.`U
 --
 ALTER TABLE `tblBlog`
   ADD PRIMARY KEY (`BlogID`),
+  ADD UNIQUE KEY `BlogMenuID_2` (`BlogMenuID`,`BlogTitle`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `BlogMenuID` (`BlogMenuID`);
 
@@ -246,13 +276,13 @@ ALTER TABLE `tblUserType`
 -- Tablo için AUTO_INCREMENT değeri `tblBlog`
 --
 ALTER TABLE `tblBlog`
-  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblBlogMenu`
 --
 ALTER TABLE `tblBlogMenu`
-  MODIFY `BlogMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `BlogMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblComponent`
@@ -264,7 +294,7 @@ ALTER TABLE `tblComponent`
 -- Tablo için AUTO_INCREMENT değeri `tblComponentMenu`
 --
 ALTER TABLE `tblComponentMenu`
-  MODIFY `ComponentMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ComponentMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblProject`
