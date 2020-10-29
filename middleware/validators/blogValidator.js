@@ -56,6 +56,19 @@ class BlogValidator {
             res.status(HttpStatusCode.EXPECTATION_FAILED).send('Must have correct data entry.');
         }
     }
+
+    static async list(req, res, next) {
+        try {
+            await joi.object({
+                limit: joi.number(),
+                offset: joi.number(),
+                BlogState: joi.boolean()
+            }).with('offset', 'limit').validateAsync(req.body);
+            next();
+        } catch (error) {
+            res.status(HttpStatusCode.EXPECTATION_FAILED).send('Must have correct data entry.');
+        }
+    }
 }
 
 module.exports = BlogValidator;

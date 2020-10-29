@@ -65,4 +65,14 @@ router.get('/blog/:BlogID', tokenControl, authControl, blogValidator.find, async
     }
 });
 
+router.get('/blog', blogValidator.list, async (req, res) => {
+    try {
+        const result = await blogTransactions.listAsync(req.body);
+        res.json(result);
+    } catch (error) {
+        res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
+    }
+});
+
+
 module.exports = router;

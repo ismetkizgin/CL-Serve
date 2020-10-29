@@ -69,6 +69,23 @@ class BlogTransactions {
             });
         });
     }
+
+    listAsync(values) {
+        const limitAndOffset = values.offset == null ? `${values.limit == null ? '' : `LIMIT ${values.limit}`}` : `LIMIT ${values.offset},${values.limit}`;
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`SELECT * FROM vwBlogList ${values.ComponentState != null ? `WHERE BlogState=${values.ComponentState}` : ''} ORDER BY BlogID DESC ${limitAndOffset}`, (error, result) => {
+                if (!error) {
+                    if (result.length > 0)
+                        resolve(result);
+                    else
+                        reject({ status: HttpStatusCode.NOT_FOUND, message: 'No blog registered to the system was found.' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
 }
 
 module.exports = BlogTransactions;
