@@ -32,7 +32,7 @@ class ComponentTransactions {
                         reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: 'An error occurred while updating component information !' });
                 }
                 else {
-                    reject(error.errno == 1062 ? { status: HttpStatusCode.CONFLICT, message: 'There is such component menu !' } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                    reject(error.errno == 1062 ? { status: HttpStatusCode.CONFLICT, message: 'There is such component !' } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
                 }
             });
         });
