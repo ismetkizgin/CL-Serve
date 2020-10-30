@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 29 Eki 2020, 17:39:32
+-- Üretim Zamanı: 30 Eki 2020, 22:11:04
 -- Sunucu sürümü: 8.0.22-0ubuntu0.20.04.2
 -- PHP Sürümü: 7.4.11
 
@@ -35,7 +35,8 @@ CREATE TABLE `tblBlog` (
   `BlogTitle` varchar(100) NOT NULL,
   `BlogDescription` varchar(200) NOT NULL,
   `BlogContent` text NOT NULL,
-  `BlogState` tinyint(1) NOT NULL DEFAULT '0'
+  `BlogState` tinyint(1) NOT NULL DEFAULT '0',
+  `BlogCreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -59,7 +60,7 @@ CREATE TABLE `tblBlogMenu` (
 CREATE TABLE `tblComponent` (
   `ComponentID` int NOT NULL,
   `UserID` int NOT NULL,
-  `MenuID` int NOT NULL,
+  `ComponentMenuID` int NOT NULL,
   `ComponentName` varchar(100) NOT NULL,
   `ComponentDescription` varchar(250) NOT NULL,
   `ComponentCode` text NOT NULL,
@@ -89,7 +90,7 @@ CREATE TABLE `tblComponentMenu` (
 CREATE TABLE `tblProject` (
   `ProjectID` int NOT NULL,
   `ProjectName` varchar(100) NOT NULL,
-  `ProjectCreatedDate` date NOT NULL,
+  `ProjectCreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ProjectUpdateDate` date NOT NULL,
   `ProjectCode` text NOT NULL,
   `UserID` int NOT NULL
@@ -142,6 +143,7 @@ INSERT INTO `tblUserType` (`UserTypeName`, `UserTypeNumber`) VALUES
 --
 CREATE TABLE `vwBlogList` (
 `BlogContent` text
+,`BlogCreatedDate` datetime
 ,`BlogDescription` varchar(200)
 ,`BlogID` int
 ,`BlogMenuID` int
@@ -162,9 +164,25 @@ CREATE TABLE `vwComponentList` (
 ,`ComponentCreatedDate` datetime
 ,`ComponentDescription` varchar(250)
 ,`ComponentID` int
+,`ComponentMenuID` int
 ,`ComponentName` varchar(100)
 ,`ComponentState` tinyint(1)
-,`MenuID` int
+,`UserID` int
+,`UserNameSurname` varchar(101)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Görünüm yapısı durumu `vwProjectList`
+-- (Asıl görünüm için aşağıya bakın)
+--
+CREATE TABLE `vwProjectList` (
+`ProjectCode` text
+,`ProjectCreatedDate` datetime
+,`ProjectID` int
+,`ProjectName` varchar(100)
+,`ProjectUpdateDate` date
 ,`UserID` int
 ,`UserNameSurname` varchar(101)
 );
@@ -191,7 +209,7 @@ CREATE TABLE `vwUserList` (
 --
 DROP TABLE IF EXISTS `vwBlogList`;
 
-CREATE VIEW `vwBlogList`  AS  select `tblBlog`.`BlogID` AS `BlogID`,`tblBlog`.`UserID` AS `UserID`,`tblBlog`.`BlogMenuID` AS `BlogMenuID`,`tblBlog`.`BlogTitle` AS `BlogTitle`,`tblBlog`.`BlogDescription` AS `BlogDescription`,`tblBlog`.`BlogContent` AS `BlogContent`,`tblBlog`.`BlogState` AS `BlogState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblBlog` join `tblUser` on((`tblUser`.`UserID` = `tblBlog`.`UserID`))) ;
+CREATE VIEW `vwBlogList`  AS  select `tblBlog`.`BlogID` AS `BlogID`,`tblBlog`.`UserID` AS `UserID`,`tblBlog`.`BlogMenuID` AS `BlogMenuID`,`tblBlog`.`BlogTitle` AS `BlogTitle`,`tblBlog`.`BlogDescription` AS `BlogDescription`,`tblBlog`.`BlogContent` AS `BlogContent`,`tblBlog`.`BlogState` AS `BlogState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname`,`tblBlog`.`BlogCreatedDate` AS `BlogCreatedDate` from (`tblBlog` join `tblUser` on((`tblUser`.`UserID` = `tblBlog`.`UserID`))) ;
 
 -- --------------------------------------------------------
 
@@ -200,7 +218,16 @@ CREATE VIEW `vwBlogList`  AS  select `tblBlog`.`BlogID` AS `BlogID`,`tblBlog`.`U
 --
 DROP TABLE IF EXISTS `vwComponentList`;
 
-CREATE VIEW `vwComponentList`  AS  select `tblComponent`.`ComponentID` AS `ComponentID`,`tblComponent`.`UserID` AS `UserID`,`tblComponent`.`MenuID` AS `MenuID`,`tblComponent`.`ComponentName` AS `ComponentName`,`tblComponent`.`ComponentDescription` AS `ComponentDescription`,`tblComponent`.`ComponentCreatedDate` AS `ComponentCreatedDate`,`tblComponent`.`ComponentCode` AS `ComponentCode`,`tblComponent`.`ComponentState` AS `ComponentState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblComponent` join `tblUser` on((`tblComponent`.`UserID` = `tblUser`.`UserID`))) ;
+CREATE VIEW `vwComponentList`  AS  select `tblComponent`.`ComponentID` AS `ComponentID`,`tblComponent`.`UserID` AS `UserID`,`tblComponent`.`ComponentMenuID` AS `ComponentMenuID`,`tblComponent`.`ComponentName` AS `ComponentName`,`tblComponent`.`ComponentDescription` AS `ComponentDescription`,`tblComponent`.`ComponentCreatedDate` AS `ComponentCreatedDate`,`tblComponent`.`ComponentCode` AS `ComponentCode`,`tblComponent`.`ComponentState` AS `ComponentState`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblComponent` join `tblUser` on((`tblComponent`.`UserID` = `tblUser`.`UserID`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Görünüm yapısı `vwProjectList`
+--
+DROP TABLE IF EXISTS `vwProjectList`;
+
+CREATE VIEW `vwProjectList`  AS  select `tblProject`.`ProjectID` AS `ProjectID`,`tblProject`.`ProjectName` AS `ProjectName`,`tblProject`.`ProjectCreatedDate` AS `ProjectCreatedDate`,`tblProject`.`ProjectUpdateDate` AS `ProjectUpdateDate`,`tblProject`.`ProjectCode` AS `ProjectCode`,`tblProject`.`UserID` AS `UserID`,concat(`tblUser`.`UserFirstName`,' ',`tblUser`.`UserLastName`) AS `UserNameSurname` from (`tblProject` join `tblUser` on((`tblProject`.`UserID` = `tblUser`.`UserID`))) ;
 
 -- --------------------------------------------------------
 
@@ -236,9 +263,9 @@ ALTER TABLE `tblBlogMenu`
 --
 ALTER TABLE `tblComponent`
   ADD PRIMARY KEY (`ComponentID`),
-  ADD UNIQUE KEY `MenuID_2` (`MenuID`,`ComponentName`),
+  ADD UNIQUE KEY `MenuID_2` (`ComponentMenuID`,`ComponentName`),
   ADD KEY `UserID` (`UserID`),
-  ADD KEY `MenuID` (`MenuID`);
+  ADD KEY `MenuID` (`ComponentMenuID`);
 
 --
 -- Tablo için indeksler `tblComponentMenu`
@@ -276,7 +303,7 @@ ALTER TABLE `tblUserType`
 -- Tablo için AUTO_INCREMENT değeri `tblBlog`
 --
 ALTER TABLE `tblBlog`
-  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblBlogMenu`
@@ -288,7 +315,7 @@ ALTER TABLE `tblBlogMenu`
 -- Tablo için AUTO_INCREMENT değeri `tblComponent`
 --
 ALTER TABLE `tblComponent`
-  MODIFY `ComponentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ComponentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblComponentMenu`
@@ -323,7 +350,7 @@ ALTER TABLE `tblBlog`
 -- Tablo kısıtlamaları `tblComponent`
 --
 ALTER TABLE `tblComponent`
-  ADD CONSTRAINT `tblComponent_ibfk_1` FOREIGN KEY (`MenuID`) REFERENCES `tblComponentMenu` (`ComponentMenuID`),
+  ADD CONSTRAINT `tblComponent_ibfk_1` FOREIGN KEY (`ComponentMenuID`) REFERENCES `tblComponentMenu` (`ComponentMenuID`),
   ADD CONSTRAINT `tblComponent_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `tblUser` (`UserID`);
 
 --
