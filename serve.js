@@ -12,6 +12,7 @@ app.use(routers.componentRouter);
 app.use(routers.blogRouter);
 app.use(routers.componentMenuRouter);
 app.use(routers.blogMenuRouter);
+app.use(routers.projectRouter);
 
 app.use((req, res, next) => {
     res.send("404 NOT FOUND");
