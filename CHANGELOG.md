@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.9.0 (2020-10-31)
+
+
+### Features
+
+* user-specific blog list pull feature added ([d3cc743](https://github.com/ismetkizgin/cl-serve/commit/d3cc743ab4a8ba9ed5768ec0ba428ef9df18ab6f))
+* user-specific component list pull feature added ([3bebb41](https://github.com/ismetkizgin/cl-serve/commit/3bebb4130e8ea864977d36ba4be2a984a033ec96))
+* added project delete router ([7e1fd2e](https://github.com/ismetkizgin/cl-serve/commit/7e1fd2e4ab520aa63d73b652ed7e025075b2255f))
+* added project list router ([e829d7d](https://github.com/ismetkizgin/cl-serve/commit/e829d7d83e47857bafe24df056eab79c05be7b81))
+
+
+### Bug Fixes
+
+* fix for component insert and update validation field ([64a3c1e](https://github.com/ismetkizgin/cl-serve/commit/64a3c1e2797235ef42a04b266bb597d1a6c33d8f))
+* fix for project list and delete router permissions ([80d364b](https://github.com/ismetkizgin/cl-serve/commit/80d364b46f0d91d8c849b409a7d047b07cb82674))
+
 ## 1.8.0 (2020-10-29)
 
 
