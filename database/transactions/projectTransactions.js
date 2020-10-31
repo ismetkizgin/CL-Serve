@@ -1,5 +1,6 @@
 const { mysqlDataContext } = require('../dataContexts');
 const HttpStatusCode = require('http-status-codes');
+const { sqlHelper } = require('../../utils');
 
 class ProjectTransactions {
     constructor() {
@@ -7,9 +8,8 @@ class ProjectTransactions {
     }
 
     listAsync(values) {
-        const limitAndOffset = values.offset == null ? `${values.limit == null ? '' : `LIMIT ${values.limit}`}` : `LIMIT ${values.offset},${values.limit}`;
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT * FROM vwProjectList ORDER BY ProjectCreatedDate desc ${limitAndOffset}`, (error, result) => {
+            this._datacontext.query(`SELECT * FROM vwProjectList ${sqlHelper.getWhere(values)} ORDER BY ProjectCreatedDate desc ${sqlHelper.getLimitOffset(values)}`, (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result);

@@ -9,6 +9,7 @@ class ProjectValidator {
             await joi.object({
                 limit: joi.number(),
                 offset: joi.number(),
+                UserID: joi.number()
             }).with('offset', 'limit').validateAsync(req.body);
             next();
         } catch (error) {

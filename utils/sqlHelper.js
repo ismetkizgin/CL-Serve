@@ -7,7 +7,7 @@ module.exports.getWhere = (object) => {
             continue;
         where += where === 'WHERE ' ? `${key}=${value}` : ` and ${key}=${value}`;
     }
-    return where;
+    return where === 'WHERE ' ? '' : where;
 }
 
 module.exports.getLimitOffset = (object) => {
