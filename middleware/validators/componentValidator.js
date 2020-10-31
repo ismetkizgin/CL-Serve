@@ -62,7 +62,8 @@ class ComponentValidator {
             await joi.object({
                 limit: joi.number(),
                 offset: joi.number(),
-                ComponentState: joi.boolean()
+                ComponentState: joi.boolean(),
+                UserID: joi.number()
             }).with('offset', 'limit').validateAsync(req.body);
             next();
         } catch (error) {

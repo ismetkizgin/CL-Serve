@@ -1,5 +1,6 @@
 const { mysqlDataContext } = require('../dataContexts');
 const HttpStatusCode = require('http-status-codes');
+const { sqlHelper } = require('../../utils');
 
 class ComponentTransactions {
     constructor() {
@@ -71,9 +72,8 @@ class ComponentTransactions {
     }
 
     listAsync(values) {
-        const limitAndOffset = values.offset == null ? `${values.limit == null ? '' : `LIMIT ${values.limit}`}` : `LIMIT ${values.offset},${values.limit}`;
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT * FROM vwComponentList ${values.ComponentState != null ? `WHERE ComponentState=${values.ComponentState}` : ''} ORDER BY ComponentName ASC ${limitAndOffset}`, (error, result) => {
+            this._datacontext.query(`SELECT * FROM vwComponentList ${sqlHelper.getWhere(values)} ORDER BY ComponentName ASC ${sqlHelper.getLimitOffset(values)}`, (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result);
