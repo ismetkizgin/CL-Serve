@@ -9,8 +9,10 @@ const HttpStatusCode = require('http-status-codes');
 let { routerAuthorization } = require('../utils');
 routerAuthorization = routerAuthorization['project'];
 
-router.get('/project', tokenControl, authControl, projectValidator.list, async (req, res) => {
+router.get('/project', tokenControl, projectValidator.list, async (req, res) => {
     try {
+        if (routerAuthorization[req.method].Public_Authorize.indexOf(req.decode.UserTypeName) === -1)
+            req.body.UserID = req.decode.UserID;
         const result = await projectTransactions.listAsync(req.body);
         res.json(result);
     } catch (error) {
@@ -18,8 +20,14 @@ router.get('/project', tokenControl, authControl, projectValidator.list, async (
     }
 });
 
-router.delete('/project', tokenControl, authControl, projectValidator.delete, async (req, res) => {
+router.delete('/project', tokenControl, projectValidator.delete, async (req, res) => {
     try {
+        const findResult = await projectTransactions.findAsync(req.body.ProjectID);
+        if (routerAuthorization[req.method].Public_Authorize.indexOf(req.decode.UserTypeName) === -1 && req.decode.UserID != findResult.UserID) {
+            res.status(HttpStatusCode.UNAUTHORIZED).send('Unauthorized transaction !');
+            return;
+        }
+
         const result = await projectTransactions.deleteAsync(req.body.ProjectID);
         res.json(result);
     } catch (error) {
