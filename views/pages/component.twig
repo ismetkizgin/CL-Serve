@@ -1,0 +1,168 @@
+<div class="content-page tabcontent" id="tabComponent">
+            <div class="content-code"></div>
+            <div class="content">
+                <div class="overflow-hidden content-section">
+                    <h1>Component Transactions</h1>
+                    <p>The user performs the component add, update, delete, list and get information operations with the following examples.</p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>COMPONENT ADD</h2>
+                    <pre><code>
+#Request Example
+POST {{ apiUrl }}component
+{
+    "UserID": 1,
+    "ComponentMenuID": 42,
+    "ComponentName": "cl",
+    "ComponentDescription": "clproject",
+    "ComponentCreatedDate": "2020-10-30T00:41:51.000Z",
+    "ComponentCode": "clprojectcomponent",
+    "ComponentState": 1,
+    "UserNameSurname": "İsmet Kizgin" 
+}
+                                
+Reusult Example:
+{
+    "message": "Component registration completed." 
+}
+        </code></pre>
+                    <p>For the add component transaction, you need to make a POST call to the URL below. :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}component</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>COMPONENT UPDATE</h2>
+                    <pre><code>
+#Request Example
+PUT {{ apiUrl }}component
+{
+    "ComponentID": 11,
+    "UserID": 1,
+    "ComponentMenuID": 26,
+    "ComponentName": "cl",
+    "ComponentDescription": "clproject",
+    "ComponentCreatedDate": "2020-10-30T00:41:51.000Z",
+    "ComponentCode": "clproject",
+    "ComponentState": 1,
+    "UserNameSurname": "İsmet Kizgin"
+}
+                                
+Reusult Example:
+{   
+    "message": "Component information has been updated."
+}
+        </code></pre>
+                    <p>For the update component transaction, you need to make a PUT call to the URL below :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}component</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>COMPONENT DELETE</h2>
+                    <pre><code>
+#Request Example
+DELETE {{ apiUrl }}component                       
+{
+    "ComponentID" : 11    
+}
+                                                      
+Reusult Example:
+{
+    "message": "Deletion succeeded."
+}
+        </code></pre>
+                    <p>For the delete component transaction, you need to make a DELETE call to the URL below. :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}component</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <h2>COMPONENT LİST</h2>
+                    <pre><code>
+#Request Example
+GET {{ apiUrl }}component                            
+Result Example:
+[
+    {
+        "ComponentID": 11,
+        "UserID": 1,
+        "ComponentMenuID": 26,
+        "ComponentName": "cl",
+        "ComponentDescription": "clproject",
+        "ComponentCreatedDate": "2020-10-30T00:41:51.000Z",
+        "ComponentCode": "clprojectcomponent",
+        "ComponentState": 1,
+        "UserNameSurname": "İsmet Kizgin"
+    },
+    {
+        "ComponentID": 1,
+        "UserID": 1,
+        "ComponentMenuID": 22,
+        "ComponentName": "cl",
+        "ComponentDescription": "clproject",
+        "ComponentCreatedDate": "2020-10-27T21:29:23.000Z",
+        "ComponentCode": "clprojectcomponent",
+        "ComponentState": 1,
+        "UserNameSurname": "Furkan Sogut"
+    },
+    ...
+]
+                               
+        </code></pre>
+                    <p>For the list component get, you need to make a GET call to the URL below :
+                        <br>
+                        <code class="higlighted">{{ apiUrl }}component</code>
+                    </p>
+                </div>
+                <div class="overflow-hidden content-section">
+                    <pre><code>
+                        
+#Request Example
+GET {{ apiUrl }}component
+{
+    "limit": 1,
+    "offset": 0                        
+}
+                        
+Reusult Example:    
+{
+    "ComponentID": 11,
+    "UserID": 1,
+    "ComponentMenuID": 26,
+    "ComponentName": "cl",
+    "ComponentDescription": "clproject",
+    "ComponentCreatedDate": "2020-10-30T00:41:51.000Z",
+    "ComponentCode": "clprojectcomponent",
+    "ComponentState": 1,
+    "UserNameSurname": "İsmet Kizgin"                                    
+}
+        </code></pre>
+          </div>                          
+            
+            <div class="overflow-hidden content-section">
+                <h2>COMPONENT İNFORMATİON</h2>
+        <pre><code>
+#Request Example
+GET {{ apiUrl }}component/1               
+Result Example:
+{
+    "ComponentID": 1,
+    "UserID": 1,
+    "ComponentMenuID": 22,
+    "ComponentName": "cl",
+    "ComponentDescription": "clproject",
+    "ComponentCreatedDate": "2020-10-27T21:29:23.000Z",
+    "ComponentCode": "clprojectcomponent",
+    "ComponentState": 1,
+    "UserNameSurname": "Furkan Sogut"
+},
+  
+      </code></pre>
+       <p>For the list component get, you need to make a GET call to the URL below :
+       <br>
+        <code class="higlighted">{{ apiUrl }}component</code>
+     </p>
+   </div>
+
+    </div>
