@@ -62,7 +62,8 @@ class BlogValidator {
             await joi.object({
                 limit: joi.number(),
                 offset: joi.number(),
-                BlogState: joi.boolean()
+                BlogState: joi.boolean(),
+                UserID: joi.number()
             }).with('offset', 'limit').validateAsync(req.body);
             next();
         } catch (error) {
