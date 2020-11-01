@@ -12,8 +12,8 @@ routerAuthorization = routerAuthorization['project'];
 router.get('/project', tokenControl, projectValidator.list, async (req, res) => {
     try {
         if (routerAuthorization[req.method].Public_Authorize.indexOf(req.decode.UserTypeName) === -1)
-            req.body.UserID = req.decode.UserID;
-        const result = await projectTransactions.listAsync(req.body);
+            req.query.UserID = req.decode.UserID;
+        const result = await projectTransactions.listAsync(req.query);
         res.json(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
@@ -27,7 +27,6 @@ router.delete('/project', tokenControl, projectValidator.delete, async (req, res
             res.status(HttpStatusCode.UNAUTHORIZED).send('Unauthorized transaction !');
             return;
         }
-
         const result = await projectTransactions.deleteAsync(req.body.ProjectID);
         res.json(result);
     } catch (error) {
