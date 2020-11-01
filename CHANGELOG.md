@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.9.1 (2020-11-01)
+
+
+### Bug Fixes
+
+* in the blog list router, the body was removed and query parameters were added ([aa973ac](https://github.com/ismetkizgin/cl-serve/commit/aa973ac6f7d4297e75da344727b5992ed50bfdda))
+* in the blog menu list router, the body was removed and query parameters were added ([9d6aa9a](https://github.com/ismetkizgin/cl-serve/commit/9d6aa9aff7fc81715466e20c40b8d76a0e8dcec7))
+* in the component list router, the body was removed and query parameters were added ([9a8d8ad](https://github.com/ismetkizgin/cl-serve/commit/9a8d8add7553f17c4a224b8ea737434ef3fb2452))
+* in the component menu list router, the body was removed and query parameters were added ([91f74b5](https://github.com/ismetkizgin/cl-serve/commit/91f74b5b2a14868c18423ea039f4a70ad3a03ab9))
+* in the project list router, the body was removed and query parameters were added ([397463f](https://github.com/ismetkizgin/cl-serve/commit/397463f14dbb8066919decad36d25f29593edefb))
+* in the user list router, the body was removed and query parameters were added ([babf4c5](https://github.com/ismetkizgin/cl-serve/commit/babf4c5a8f63718ac6c391baa68452b8be10efd8))
+
 ## 1.9.0 (2020-10-31)
 
 
