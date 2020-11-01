@@ -67,7 +67,7 @@ router.get('/component/:ComponentID', tokenControl, authControl, componentValida
 
 router.get('/component', componentValidator.list, async (req, res) => {
     try {
-        const result = await componentTransactions.listAsync(req.body);
+        const result = await componentTransactions.listAsync(req.query);
         res.json(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
