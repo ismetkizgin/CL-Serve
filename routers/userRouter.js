@@ -11,7 +11,7 @@ const moment = require('moment');
 
 router.get('/user', tokenControl, authControl, userValidator.list, async (req, res) => {
     try {
-        const result = await userTransactions.listAsync(req.body);
+        const result = await userTransactions.listAsync(req.query);
         res.json(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
