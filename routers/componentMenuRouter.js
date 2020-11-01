@@ -9,7 +9,7 @@ const HttpStatusCode = require('http-status-codes');
 
 router.get('/component-menu/', componentMenuValidator.list, async (req, res) => {
     try {
-        const result = await componentMenuTransactions.listAsync(req.body);
+        const result = await componentMenuTransactions.listAsync(req.query);
         res.json(result);
     } catch (error) {
         res.status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR).send(error.message);
