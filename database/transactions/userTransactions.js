@@ -26,7 +26,7 @@ class UserTransactions {
     listAsync(values) {
         const limitAndOffset = values.offset == null ? `${values.limit == null ? '' : `LIMIT ${values.limit}`}` : `LIMIT ${values.offset},${values.limit}`;
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT vwUserList.* FROM vwUserList LEFT JOIN tblUserType ON vwUserList.UserTypeName=tblUserType.UserTypeName WHERE tblUserType.UserTypeNumber<(SELECT UserTypeNumber FROM tblUserType WHERE UserTypeName='Root') ORDER BY UserFirstName, UserLastName ASC ${limitAndOffset}`, [values.UserTypeName], (error, result) => {
+            this._datacontext.query(`SELECT * FROM vwUserList ORDER BY UserFirstName, UserLastName ASC ${limitAndOffset}`, (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result);
@@ -42,7 +42,7 @@ class UserTransactions {
 
     findAsync(values) {
         return new Promise((resolve, reject) => {
-            this._datacontext.query(`SELECT vwUserList.* FROM vwUserList LEFT JOIN tblUserType ON vwUserList.UserTypeName=tblUserType.UserTypeName WHERE tblUserType.UserTypeNumber<(SELECT UserTypeNumber FROM tblUserType WHERE UserTypeName=?) AND UserID=?`, [values.UserTypeName, values.UserID], (error, result) => {
+            this._datacontext.query(`SELECT * FROM vwUserList WHERE UserID=?`, [values.UserID], (error, result) => {
                 if (!error) {
                     if (result.length > 0)
                         resolve(result[0]);
@@ -128,6 +128,22 @@ class UserTransactions {
                         resolve('The user password has been changed successfully.');
                     else
                         reject({ status: HttpStatusCode.BAD_REQUEST, message: 'User password does not match.' });
+                }
+                else {
+                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                }
+            });
+        });
+    }
+
+    statusFindAsync(values) {
+        return new Promise((resolve, reject) => {
+            this._datacontext.query(`SELECT vwUserList.* FROM vwUserList LEFT JOIN tblUserType ON vwUserList.UserTypeName=tblUserType.UserTypeName WHERE tblUserType.UserTypeNumber<(SELECT UserTypeNumber FROM tblUserType WHERE UserTypeName=?) AND UserID=?`, [values.UserTypeName, values.UserID], (error, result) => {
+                if (!error) {
+                    if (result.length > 0)
+                        resolve(result[0]);
+                    else
+                        reject({ status: HttpStatusCode.NOT_FOUND, message: 'No user registered to the system was found.' });
                 }
                 else {
                     reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });

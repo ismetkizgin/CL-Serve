@@ -29,7 +29,7 @@ router.get('/user/:UserID', tokenControl, authControl, userValidator.find, async
 
 router.delete('/user', tokenControl, authControl, userValidator.delete, async (req, res) => {
     try {
-        await userTransactions.findAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
+        await userTransactions.statusFindAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
         const result = await userTransactions.deleteAsync(req.body.UserID);
         res.json(result);
     } catch (error) {
@@ -42,7 +42,7 @@ router.delete('/user', tokenControl, authControl, userValidator.delete, async (r
 
 router.put('/user', tokenControl, authControl, userValidator.update, userInsertAuthControl, async (req, res) => {
     try {
-        await userTransactions.findAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
+        await userTransactions.statusFindAsync({ UserID: req.body.UserID, UserTypeName: req.decode.UserTypeName });
         req.body.UserDateOfBirth = moment(new Date(req.body.UserDateOfBirth)).format('YYYY/MM/DD');
         const result = await userTransactions.updateAsync(req.body);
         res.json(result);
