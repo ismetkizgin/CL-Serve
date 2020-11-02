@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 30 Eki 2020, 22:11:04
+-- Üretim Zamanı: 02 Kas 2020, 03:36:56
 -- Sunucu sürümü: 8.0.22-0ubuntu0.20.04.2
 -- PHP Sürümü: 7.4.11
 
@@ -112,6 +112,17 @@ CREATE TABLE `tblUser` (
   `UserTypeName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Tetikleyiciler `tblUser`
+--
+DELIMITER $$
+CREATE TRIGGER `userBlog` BEFORE DELETE ON `tblUser` FOR EACH ROW UPDATE tblBlog SET UserID=(SELECT UserID FROM tblUser WHERE UserTypeName='Root' ORDER BY RAND() LIMIT 1) WHERE UserID=old.UserID
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `userComponent` BEFORE DELETE ON `tblUser` FOR EACH ROW UPDATE tblComponent SET UserID=(SELECT UserID FROM tblUser WHERE UserTypeName='Root' ORDER BY RAND() LIMIT 1) WHERE UserID=old.UserID
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -303,7 +314,7 @@ ALTER TABLE `tblUserType`
 -- Tablo için AUTO_INCREMENT değeri `tblBlog`
 --
 ALTER TABLE `tblBlog`
-  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblBlogMenu`
@@ -327,7 +338,7 @@ ALTER TABLE `tblComponentMenu`
 -- Tablo için AUTO_INCREMENT değeri `tblProject`
 --
 ALTER TABLE `tblProject`
-  MODIFY `ProjectID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ProjectID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblUser`
