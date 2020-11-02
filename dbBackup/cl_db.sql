@@ -142,7 +142,7 @@ CREATE TABLE `tblUserType` (
 INSERT INTO `tblUserType` (`UserTypeName`, `UserTypeNumber`) VALUES
 ('Administrator', 666),
 ('Developer', 555),
-('Editor', 444),
+('Editor', 555),
 ('Root', 777),
 ('User', 333);
 
