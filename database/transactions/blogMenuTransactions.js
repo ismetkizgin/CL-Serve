@@ -48,7 +48,7 @@ class BlogMenuTransactions {
                         reject({ status: HttpStatusCode.GONE, message: 'There is no such blog menu !' });
                 }
                 else {
-                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                    reject(error.errno == 1451 ? { status: HttpStatusCode.BAD_REQUEST, message: "There are blog posts on the blog menu so they cannot be deleted !" } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
                 }
             });
         });

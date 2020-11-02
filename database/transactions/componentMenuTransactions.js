@@ -17,7 +17,7 @@ class ComponentMenuTransactions {
                         reject({ status: HttpStatusCode.NOT_FOUND, message: 'No component menu registered to the system was found.' });
                 }
                 else {
-                    reject({ status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
+                    reject(error.errno == 1451 ? { status: HttpStatusCode.BAD_REQUEST, message: "There are components in the component menu, so they cannot be deleted !" } : { status: HttpStatusCode.INTERNAL_SERVER_ERROR, message: error.message });
                 }
             });
         });
