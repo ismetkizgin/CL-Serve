@@ -153,7 +153,6 @@ pre {
   padding: 0 28px;
   box-sizing: border-box;
   display: block;
-  max-width: 680px;
 }
 .full-content h1,
 .full-content h2,
@@ -191,10 +190,7 @@ pre {
   font-size: 14px;
   margin-bottom: 0.2em;
 }
-.content-page .content p,
-.content-page .content pre {
-  max-width: 760px;
-}
+
 .content pre,
 .content blockquote {
   background-color: #323f4c;
