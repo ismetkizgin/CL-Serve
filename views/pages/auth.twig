@@ -11,8 +11,8 @@
 #Request Example
 POST {{ apiUrl }}login
 {
-    "UserEmail": cl@project.com
-    "UserPassword": password
+    "UserEmail": "cl@project.com"
+    "UserPassword": "password"
 }
         
 Result Example:
@@ -75,8 +75,8 @@ User information has been updated.</code></pre>
 #Request Example
 PUT {{ apiUrl }}change-password
 {
-    "UserPassword": password,
-    "UserNewPassword": paswordd
+    "UserPassword": "password",
+    "UserNewPassword": "paswordd"
 }
         
 Reusult Example:
@@ -92,7 +92,7 @@ The user password has been changed successfully.</code></pre>
 #Request Example
 POST {{ apiUrl }}password-control
 {
-    "UserPassword": password,
+    "UserPassword": "password",
 }
 	
 Result Example:
