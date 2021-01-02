@@ -1,6 +1,7 @@
 const { mysqlDataContext } = require("../dataContexts");
 const HttpStatusCode = require("http-status-codes");
 const { sqlHelper } = require("../../utils");
+const Md5 = require("md5");
 
 class UserTransactions {
   constructor() {
@@ -9,12 +10,12 @@ class UserTransactions {
 
   loginAsync(values) {
     return new Promise((resolve, reject) => {
+      if (values.UserPassword) values.UserPassword = Md5(values.UserPassword);
       this._datacontext.query(
         `SELECT * FROM tblUser ${sqlHelper.getWhere(values)}`,
         (error, result) => {
           if (!error) {
             if (result.length) {
-              delete result[0].UserPassword;
               resolve(result[0]);
             } else
               reject({
@@ -84,6 +85,7 @@ class UserTransactions {
 
   passwordControlAsync(values) {
     return new Promise((resolve, reject) => {
+      values.UserPassword = Md5(values.UserPassword);
       this._datacontext.query(
         `SELECT * FROM tblUser WHERE UserPassword=? AND UserID=? `,
         [values.UserPassword, values.UserID],
@@ -164,6 +166,7 @@ class UserTransactions {
 
   insertAsync(values) {
     return new Promise((resolve, reject) => {
+      values.UserPassword = Md5(values.UserPassword);
       this._datacontext.query(
         `INSERT INTO tblUser SET ?`,
         values,
@@ -196,6 +199,7 @@ class UserTransactions {
 
   changePasswordAsync(values) {
     return new Promise((resolve, reject) => {
+      values.UserPassword = Md5(values.UserPassword);
       this._datacontext.query(
         `UPDATE tblUser SET UserPassword=? WHERE UserPassword=? AND UserID=?`,
         [values.UserNewPassword, values.UserPassword, values.UserID],

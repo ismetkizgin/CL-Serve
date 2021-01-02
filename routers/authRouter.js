@@ -15,6 +15,7 @@ const { smtpEmail } = require("../utils/config");
 router.post("/login", authValidator.login, async (req, res) => {
   try {
     const result = await userTransactions.loginAsync(req.body);
+    delete result.UserPassword;
     const payload = {
       UserID: result.UserID,
       UserTypeName: result.UserTypeName,
@@ -139,6 +140,7 @@ router.post("/forgot-password", async (req, res) => {
       {
         name: result.UserFirstName,
         forgotPasswordKey: result.UserPassword,
+        email: result.UserEmail,
       }
     );
 
@@ -150,6 +152,7 @@ router.post("/forgot-password", async (req, res) => {
     });
     res.json(mailResponse);
   } catch (error) {
+    console.log(error);
     res
       .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
       .send(error.message);
