@@ -124,40 +124,59 @@ router.put(
   }
 );
 
-router.post("/forgot-password", async (req, res) => {
-  try {
-    const result = await userTransactions.loginAsync({
-      UserEmail: req.body.UserEmail,
-    });
+router.post(
+  "/forgot-password",
+  authValidator.forgotPassword,
+  async (req, res) => {
+    try {
+      const result = await userTransactions.loginAsync({
+        UserEmail: req.body.UserEmail,
+      });
 
-    const emailSender = EmailSenderFactory.create(
-      "nodemailerEmailSender",
-      smtpEmail
-    );
+      const emailSender = EmailSenderFactory.create(
+        "nodemailerEmailSender",
+        smtpEmail
+      );
 
-    const htmlSource = await Handlebars.createTemplateAsync(
-      "handlebarsTemplates/forgot-password.html",
-      {
-        name: result.UserFirstName,
-        forgotPasswordKey: result.UserPassword,
-        email: result.UserEmail,
-      }
-    );
+      const htmlSource = await Handlebars.createTemplateAsync(
+        "handlebarsTemplates/forgot-password.html",
+        {
+          name: result.UserFirstName,
+          forgotPasswordKey: result.UserPassword,
+          email: result.UserEmail,
+        }
+      );
 
-    const mailResponse = await emailSender.sendEmailAsync({
-      from: `Code My Life <${"noreply@@codemylife.com"}>`,
-      to: result.UserEmail,
-      subject: "Code My Life Şifremi Unuttum !",
-      html: htmlSource,
-    });
-    res.json(mailResponse);
-  } catch (error) {
-    console.log(error);
-    res
-      .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
-      .send(error.message);
+      const mailResponse = await emailSender.sendEmailAsync({
+        from: `Code My Life <${"noreply@@codemylife.com"}>`,
+        to: result.UserEmail,
+        subject: "Code My Life Şifremi Unuttum !",
+        html: htmlSource,
+      });
+      res.json(mailResponse);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
+        .send(error.message);
+    }
   }
-});
+);
+
+router.put(
+  "/forgot-password",
+  authValidator.forgotChangePassword,
+  async (req, res) => {
+    try {
+      const result = await userTransactions.forgotChangePasswordAsync(req.body);
+      res.json(result);
+    } catch (error) {
+      res
+        .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
+        .send(error.message);
+    }
+  }
+);
 
 router.get("/token-decode", tokenControl, async (req, res) => {
   res.json(req.decode);

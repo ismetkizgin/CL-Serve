@@ -104,6 +104,38 @@ class AuthValidator {
     }
   }
 
+  static async forgotChangePassword(req, res, next) {
+    try {
+      await joi
+        .object({
+          UserEmail: joi.string().email().required(),
+          UserPassword: joi.string().max(99).required(),
+          UserNewPassword: joi.string().max(99).required(),
+        })
+        .validateAsync(req.body);
+      next();
+    } catch (error) {
+      res
+        .status(HttpStatusCode.EXPECTATION_FAILED)
+        .send("Must have correct data entry.");
+    }
+  }
+
+  static async forgotPassword(req, res, next) {
+    try {
+      await joi
+        .object({
+          UserEmail: joi.string().email().required(),
+        })
+        .validateAsync(req.body);
+      next();
+    } catch (error) {
+      res
+        .status(HttpStatusCode.EXPECTATION_FAILED)
+        .send("Must have correct data entry.");
+    }
+  }
+
   static async passwordControl(req, res, next) {
     try {
       await joi

@@ -200,9 +200,36 @@ class UserTransactions {
   changePasswordAsync(values) {
     return new Promise((resolve, reject) => {
       values.UserPassword = Md5(values.UserPassword);
+      values.UserNewPassword = Md5(values.UserNewPassword);
       this._datacontext.query(
         `UPDATE tblUser SET UserPassword=? WHERE UserPassword=? AND UserID=?`,
         [values.UserNewPassword, values.UserPassword, values.UserID],
+        (error, result) => {
+          if (!error) {
+            if (result.affectedRows)
+              resolve("The user password has been changed successfully.");
+            else
+              reject({
+                status: HttpStatusCode.BAD_REQUEST,
+                message: "User password does not match.",
+              });
+          } else {
+            reject({
+              status: HttpStatusCode.INTERNAL_SERVER_ERROR,
+              message: error.message,
+            });
+          }
+        }
+      );
+    });
+  }
+
+  forgotChangePasswordAsync(values) {
+    return new Promise((resolve, reject) => {
+      values.UserNewPassword = Md5(values.UserNewPassword);
+      this._datacontext.query(
+        `UPDATE tblUser SET UserPassword=? WHERE UserPassword=? AND UserEmail=?`,
+        [values.UserNewPassword, values.UserPassword, values.UserEmail],
         (error, result) => {
           if (!error) {
             if (result.affectedRows)
