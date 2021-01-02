@@ -8,6 +8,9 @@ const tokenControl = verifyToken.tokenControl;
 const HttpStatusCode = require("http-status-codes");
 const moment = require("moment");
 const Roles = require("../models/roles");
+const Handlebars = require("../utils/handlebarsUtils");
+const EmailSenderFactory = require("../utils/email/emailSenderFactory");
+const { smtpEmail } = require("../utils/config");
 
 router.post("/login", authValidator.login, async (req, res) => {
   try {
@@ -113,13 +116,45 @@ router.put(
       });
       res.json(result);
     } catch (error) {
-      console.log(error);
       res
         .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
         .send(error.message);
     }
   }
 );
+
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const result = await userTransactions.loginAsync({
+      UserEmail: req.body.UserEmail,
+    });
+
+    const emailSender = EmailSenderFactory.create(
+      "nodemailerEmailSender",
+      smtpEmail
+    );
+
+    const htmlSource = await Handlebars.createTemplateAsync(
+      "handlebarsTemplates/forgot-password.html",
+      {
+        name: result.UserFirstName,
+        forgotPasswordKey: result.UserPassword,
+      }
+    );
+
+    const mailResponse = await emailSender.sendEmailAsync({
+      from: `Code My Life <${"noreply@@codemylife.com"}>`,
+      to: result.UserEmail,
+      subject: "Code My Life Şifremi Unuttum !",
+      html: htmlSource,
+    });
+    res.json(mailResponse);
+  } catch (error) {
+    res
+      .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
+      .send(error.message);
+  }
+});
 
 router.get("/token-decode", tokenControl, async (req, res) => {
   res.json(req.decode);
