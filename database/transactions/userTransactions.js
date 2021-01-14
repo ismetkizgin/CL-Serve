@@ -274,6 +274,30 @@ class UserTransactions {
       );
     });
   }
+
+  forgotPasswordAsync(values) {
+    return new Promise((resolve, reject) => {
+      this._datacontext.query(
+        `SELECT * FROM tblUser WHERE UserEmail=?`,
+        [values.UserEmail],
+        (error, result) => {
+          if (!error) {
+            if (result.length) {
+              resolve(result[0]);
+            } else
+              reject({
+                status: HttpStatusCode.NOT_FOUND,
+                message: "There is no such user !",
+              });
+          } else
+            reject({
+              status: HttpStatusCode.INTERNAL_SERVER_ERROR,
+              message: error.message,
+            });
+        }
+      );
+    });
+  }
 }
 
 module.exports = UserTransactions;

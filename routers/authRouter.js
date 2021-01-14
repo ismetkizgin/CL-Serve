@@ -129,9 +129,11 @@ router.post(
   authValidator.forgotPassword,
   async (req, res) => {
     try {
-      const result = await userTransactions.loginAsync({
+      const result = await userTransactions.forgotPasswordAsync({
         UserEmail: req.body.UserEmail,
       });
+
+      console.log(result);
 
       const emailSender = EmailSenderFactory.create(
         "nodemailerEmailSender",
