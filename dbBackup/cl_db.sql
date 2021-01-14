@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 02 Kas 2020, 03:36:56
--- Sunucu sürümü: 8.0.22-0ubuntu0.20.04.2
--- PHP Sürümü: 7.4.11
+-- Üretim Zamanı: 15 Oca 2021, 00:28:07
+-- Sunucu sürümü: 8.0.22-0ubuntu0.20.04.3
+-- PHP Sürümü: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Veritabanı: `cl_db`
 --
+
+DELIMITER $$
+--
+-- Yordamlar
+--
+CREATE PROCEDURE `prAdditiveUserTypes` (IN `UserType` VARCHAR(50))  NO SQL
+SELECT UserTypeName FROM tblUserType WHERE UserTypeNumber<(SELECT UserTypeNumber FROM tblUserType WHERE UserTypeName=UserType)$$
+
+CREATE PROCEDURE `prLogin` (IN `EmailAddress` VARCHAR(150), IN `Password` VARCHAR(99))  NO SQL
+SELECT * FROM tblUser WHERE UserEmail=EmailAddress AND UserPassword=Password$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -113,6 +125,12 @@ CREATE TABLE `tblUser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Tablo döküm verisi `tblUser`
+--
+
+INSERT INTO `tblUser` (`UserID`, `UserFirstName`, `UserLastName`, `UserEmail`, `UserPassword`, `UserDateOfBirth`, `UserTypeName`) VALUES
+(1, 'İsmet', 'Kizgin', 'cl@project.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2020-10-15', 'Root');
+--
 -- Tetikleyiciler `tblUser`
 --
 DELIMITER $$
@@ -142,7 +160,7 @@ CREATE TABLE `tblUserType` (
 INSERT INTO `tblUserType` (`UserTypeName`, `UserTypeNumber`) VALUES
 ('Administrator', 666),
 ('Developer', 555),
-('Editor', 555),
+('Editor', 444),
 ('Root', 777),
 ('User', 333);
 
@@ -153,15 +171,15 @@ INSERT INTO `tblUserType` (`UserTypeName`, `UserTypeNumber`) VALUES
 -- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `vwBlogList` (
-`BlogContent` text
-,`BlogCreatedDate` datetime
-,`BlogDescription` varchar(200)
-,`BlogID` int
-,`BlogMenuID` int
-,`BlogState` tinyint(1)
-,`BlogTitle` varchar(100)
+`BlogID` int
 ,`UserID` int
+,`BlogMenuID` int
+,`BlogTitle` varchar(100)
+,`BlogDescription` varchar(200)
+,`BlogContent` text
+,`BlogState` tinyint(1)
 ,`UserNameSurname` varchar(101)
+,`BlogCreatedDate` datetime
 );
 
 -- --------------------------------------------------------
@@ -171,14 +189,14 @@ CREATE TABLE `vwBlogList` (
 -- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `vwComponentList` (
-`ComponentCode` text
-,`ComponentCreatedDate` datetime
-,`ComponentDescription` varchar(250)
-,`ComponentID` int
+`ComponentID` int
+,`UserID` int
 ,`ComponentMenuID` int
 ,`ComponentName` varchar(100)
+,`ComponentDescription` varchar(250)
+,`ComponentCreatedDate` datetime
+,`ComponentCode` text
 ,`ComponentState` tinyint(1)
-,`UserID` int
 ,`UserNameSurname` varchar(101)
 );
 
@@ -189,11 +207,11 @@ CREATE TABLE `vwComponentList` (
 -- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `vwProjectList` (
-`ProjectCode` text
-,`ProjectCreatedDate` datetime
-,`ProjectID` int
+`ProjectID` int
 ,`ProjectName` varchar(100)
+,`ProjectCreatedDate` datetime
 ,`ProjectUpdateDate` date
+,`ProjectCode` text
 ,`UserID` int
 ,`UserNameSurname` varchar(101)
 );
@@ -205,11 +223,11 @@ CREATE TABLE `vwProjectList` (
 -- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `vwUserList` (
-`UserDateOfBirth` date
-,`UserEmail` varchar(100)
+`UserID` int
 ,`UserFirstName` varchar(50)
-,`UserID` int
 ,`UserLastName` varchar(50)
+,`UserEmail` varchar(100)
+,`UserDateOfBirth` date
 ,`UserTypeName` varchar(50)
 );
 
@@ -314,7 +332,7 @@ ALTER TABLE `tblUserType`
 -- Tablo için AUTO_INCREMENT değeri `tblBlog`
 --
 ALTER TABLE `tblBlog`
-  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `BlogID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblBlogMenu`
@@ -326,13 +344,13 @@ ALTER TABLE `tblBlogMenu`
 -- Tablo için AUTO_INCREMENT değeri `tblComponent`
 --
 ALTER TABLE `tblComponent`
-  MODIFY `ComponentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ComponentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblComponentMenu`
 --
 ALTER TABLE `tblComponentMenu`
-  MODIFY `ComponentMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `ComponentMenuID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `tblProject`
@@ -344,7 +362,7 @@ ALTER TABLE `tblProject`
 -- Tablo için AUTO_INCREMENT değeri `tblUser`
 --
 ALTER TABLE `tblUser`
-  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
