@@ -12,11 +12,12 @@ class UserTransactions {
     return new Promise((resolve, reject) => {
       if (values.UserPassword) values.UserPassword = Md5(values.UserPassword);
       this._datacontext.query(
-        `SELECT * FROM tblUser ${sqlHelper.getWhere(values)}`,
+        `CALL prLogin(?, ?)`,
+        [values.UserEmail, values.UserPassword],
         (error, result) => {
           if (!error) {
             if (result.length) {
-              resolve(result[0]);
+              resolve(result[0][0]);
             } else
               reject({
                 status: HttpStatusCode.NOT_FOUND,
