@@ -88,34 +88,16 @@ router.delete(
   }
 );
 
-router.get(
-  "/blog/:BlogID",
-  tokenControl,
-  authControl,
-  blogValidator.find,
-  async (req, res) => {
-    try {
-      const result = await blogTransactions.findAsync(req.params.BlogID);
-      if (
-        routerAuthorization[req.method].Individual_Authorize.indexOf(
-          req.decode.UserTypeName
-        ) != -1
-      ) {
-        if (result.UserID != req.decode.UserID) {
-          res
-            .status(HttpStatusCode.UNAUTHORIZED)
-            .send("Unauthorized transaction !");
-          return;
-        }
-      }
-      res.json(result);
-    } catch (error) {
-      res
-        .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
-        .send(error.message);
-    }
+router.get("/blog/:BlogID", blogValidator.find, async (req, res) => {
+  try {
+    const result = await blogTransactions.findAsync(req.params.BlogID);
+    res.json(result);
+  } catch (error) {
+    res
+      .status(error.status || HttpStatusCode.INTERNAL_SERVER_ERROR)
+      .send(error.message);
   }
-);
+});
 
 router.get("/blog", blogValidator.list, async (req, res) => {
   try {
