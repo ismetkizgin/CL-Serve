@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/ismetkizgin/cl-serve/compare/v1.10.0...v1.11.0) (2021-01-14)
+
+
+### Features
+
+* added forgot password reset router ([b85e027](https://github.com/ismetkizgin/cl-serve/commit/b85e0277693aa2090fc6faeb4736c617064d5baf))
+* added forgot password router ([cedcbca](https://github.com/ismetkizgin/cl-serve/commit/cedcbca440f1ff1e52d013aa09d9e294acfd9b94))
+* added sign up router ([db715e6](https://github.com/ismetkizgin/cl-serve/commit/db715e68faaf28a967bf4137168f91947b6d0df3))
+
+
+### Bug Fixes
+
+* fix for blog find router ([3eeb37d](https://github.com/ismetkizgin/cl-serve/commit/3eeb37d35dd1ddd45924b516a7d2cbd5f633a9f3))
+* fix for blog list router ([387d62f](https://github.com/ismetkizgin/cl-serve/commit/387d62f79bc7128b4ee0cc3ae5066fec25aea905))
+
 ## 1.10.0 (2020-11-02)
 
 
