@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/ismetkizgin/cl-serve/compare/v1.11.0...v1.11.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* fix for forget password router ([0554533](https://github.com/ismetkizgin/cl-serve/commit/055453311459529bc800b617e90e15d162e94a57))
+
 ## [1.11.0](https://github.com/ismetkizgin/cl-serve/compare/v1.10.0...v1.11.0) (2021-01-14)
 
 
