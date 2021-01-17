@@ -75,7 +75,7 @@ router.put(
       req.body.UserDateOfBirth = moment(
         new Date(req.body.UserDateOfBirth)
       ).format("YYYY/MM/DD");
-      delete req.body[UserPassword];
+      delete req.body.UserPassword;
       const result = await userTransactions.updateAsync(
         Object.assign(req.body, { UserID: req.decode.UserID })
       );
