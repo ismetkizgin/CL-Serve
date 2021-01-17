@@ -37,7 +37,7 @@ router.get(
       if (
         routerAuthorization[req.method].Individual_Authorize.indexOf(
           req.decode.UserTypeName
-        ) === -1
+        ) !== -1
       )
         req.params.UserID = req.decode.UserID;
       const result = await userTransactions.findAsync({
