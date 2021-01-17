@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.2](https://github.com/ismetkizgin/cl-serve/compare/v1.11.1...v1.11.2) (2021-01-17)
+
+
+### Bug Fixes
+
+* fix for my account update router ([ae7c52e](https://github.com/ismetkizgin/cl-serve/commit/ae7c52e623fe85e4e712e7eb73cc7e74a662344f))
+* fix for user find router ([ccb8534](https://github.com/ismetkizgin/cl-serve/commit/ccb8534046077d6f579df05c353a3c5d93280887))
+
 ### [1.11.1](https://github.com/ismetkizgin/cl-serve/compare/v1.11.0...v1.11.1) (2021-01-14)
 
 
